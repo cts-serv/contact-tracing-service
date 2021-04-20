@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+	crossorigin="anonymous">
+<title>CTS | Application Settings</title>
+</head>
+<body>
+	<nav th:replace="home::navi"></nav>
+	<div class="row container-fluid justify-content-center">
+		<div class="col">
+			<div class="row border justify-content-around mb-3 shadow">
+				<h4 class="col-12 text-center display-4">Department</h4>
+				<div class="col-11 col-md-7 table-responsive border mb-3 mt-3">
+					<table class="table table-hover table-sm border mt-3">
+						<thead>
+							<tr>
+								<th>Code</th>
+								<th>Description</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="dept: ${validDepartments}">
+								<td th:text="${dept.code}"></td>
+								<td th:text="${dept.description}"></td>
+								<td>
+									<form class="needs-validation" action="#" th:action="@{/applicationsettings/remove}" th:object="${applicationVariable}" method="post" novalidate>
+										<input type="hidden" th:value="${dept.code}" name="code">
+										<input type="hidden" th:value="${dept.description}" name="description">
+										<input type="hidden" th:value="${dept.enabled}" name="enabled">
+										<input type="hidden" th:value="${dept.variableId}" name="variableId">
+										<button type="submit" class="btn btn-danger  btn-sm">Remove</button>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
+				<div class="col-11 col-md-4 mt-3 mb-3">
+					<form class="row row-cols-1 needs-validation border" action="#" th:action="@{/applicationsettings/add}" th:object="${applicationVariable}" method="post" novalidate>
+						<p class="mt-3">Add a Department value.</p>
+						<div class="col mb-3">
+							<label class="form-label" for="txtCode">Code</label>
+							<input id="txtCode" class="form-control" type="text" th:field="*{code}" th:classappend="${not #lists.isEmpty(#fields.errors('code'))} ? is-invalid">
+							<div class="invalid-feedback">
+								<p th:each="error: ${#fields.errors('code')}" th:text="${error}">Invalid value</p>
+							</div>
+						</div>
+						<div class="col mb-3">
+							<label class="form-label" for="txtDescription">Description</label>
+							<input id="txtDescription" class="form-control" type="text" th:field="*{description}" th:classappend="${not #lists.isEmpty(#fields.errors('description'))} ? is-invalid">
+							<div class="invalid-feedback">
+								<p th:each="error: ${#fields.errors('description')}" th:text="${error}">Invalid value</p>
+							</div>
+						</div>
+						<div class="col mb-3">
+							<input type="hidden" value="true" name="enabled">
+							<input type="hidden" value="DEPARTMENT" name="variableGroup">
+							<button type="submit" class="btn btn-primary">Add</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			
+			<div class="row border justify-content-around mb-3 shadow">
+				<h4 class="col-12 text-center display-4">Position</h4>
+				<div class="col-11 col-md-7 table-responsive border mb-3 mt-3">
+					<table class="table table-hover table-sm border mt-3">
+						<thead>
+							<tr>
+								<th>Code</th>
+								<th>Description</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="pos: ${validPositions}">
+								<td th:text="${pos.code}"></td>
+								<td th:text="${pos.description}"></td>
+								<td>
+									<form class="needs-validation" action="#" th:action="@{/applicationsettings/remove}" th:object="${applicationVariable}" method="post" novalidate>
+										<input type="hidden" th:value="${pos.code}" name="code">
+										<input type="hidden" th:value="${pos.description}" name="description">
+										<input type="hidden" th:value="${pos.enabled}" name="enabled">
+										<input type="hidden" th:value="${pos.variableId}" name="variableId">
+										<button type="submit" class="btn btn-danger  btn-sm">Remove</button>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
+				<div class="col-11 col-md-4 mt-3 mb-3">
+					<form class="row row-cols-1 needs-validation border" action="#" th:action="@{/applicationsettings/add}" th:object="${applicationVariable}" method="post" novalidate>
+						<p class="mt-3">Add a Position value.</p>
+						<div class="col mb-3">
+							<label class="form-label" for="txtCode">Code</label>
+							<input id="txtCode" class="form-control" type="text" th:field="*{code}" th:classappend="${not #lists.isEmpty(#fields.errors('code'))} ? is-invalid">
+							<div class="invalid-feedback">
+								<p th:each="error: ${#fields.errors('code')}" th:text="${error}">Invalid value</p>
+							</div>
+						</div>
+						<div class="col mb-3">
+							<label class="form-label" for="txtDescription">Description</label>
+							<input id="txtDescription" class="form-control" type="text" th:field="*{description}" th:classappend="${not #lists.isEmpty(#fields.errors('description'))} ? is-invalid">
+							<div class="invalid-feedback">
+								<p th:each="error: ${#fields.errors('description')}" th:text="${error}">Invalid value</p>
+							</div>
+						</div>
+						<div class="col mb-3">
+							<input type="hidden" value="true" name="enabled">
+							<input type="hidden" value="POSITION" name="variableGroup">
+							<button type="submit" class="btn btn-primary">Add</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="border mb-3 justify-content-center row shadow">
+				<h4 class="col-12 text-center display-4">Detection and Notification Settings</h4>
+				<div class="col-11">
+					<form class="row row-cols-1 needs-validation border mb-3 mt-3" action="#" th:action="@{/applicationsettings/save}" th:object="${detectionVariable}" method="post" novalidate>
+						<div class="col mb-3 mt-3">
+							<label class="form-label" for="rngDetectionTemperature">Detection Temperature</label>
+							<input type="text" th:field="*{detectionTemperature}" id="rangeValue" disabled>
+							<div class="range">
+								<input id="rngDetectionTemperature" class="form-range" type="range" min="36" max="38" step="0.1" onchange="updateRangeValue(this.value);" th:field="*{detectionTemperature}" th:classappend="${not #lists.isEmpty(#fields.errors('detectionTemperature'))} ? is-invalid">
+								<div class="invalid-feedback">
+									<p th:each="error: ${#fields.errors('detectionTemperature')}" th:text="${error}">Invalid value</p>
+								</div>
+							</div>
+						</div>
+						<div class="col mb-3">
+							<label class="form-label" for="txtClinicNumber">Clinic Contact Number</label>
+							<div class="input-group">
+								<span class="input-group-text">+63</span>
+								<input id="txtClinicNumber" class="form-control" type="text" th:field="*{clinicContactNumber}" th:classappend="${not #lists.isEmpty(#fields.errors('clinicContactNumber'))} ? is-invalid">
+								<div class="invalid-feedback">
+									<p th:each="error: ${#fields.errors('clinicContactNumber')}" th:text="${error}">Invalid value</p>
+								</div>
+							</div>
+						</div>
+						<div class="col mb-3">
+							<label class="form-label" for="txtClinicEmail">Clinic Email</label>
+							<input id="txtClinicEmail" class="form-control" type="email" th:field="*{clinicEmail}" th:classappend="${not #lists.isEmpty(#fields.errors('clinicEmail'))} ? is-invalid">
+							<div class="invalid-feedback">
+								<p th:each="error: ${#fields.errors('clinicEmail')}" th:text="${error}">Invalid value</p>
+							</div>
+						</div>
+						<div class="col mb-3">
+							<label class="form-label" for="txtAdminNumber">Clinic Contact Number</label>
+							<div class="input-group">
+								<span class="input-group-text">+63</span>
+								<input id="txtAdminNumber" class="form-control" type="text" th:field="*{adminContactNumber}" th:classappend="${not #lists.isEmpty(#fields.errors('adminContactNumber'))} ? is-invalid">
+								<div class="invalid-feedback">
+									<p th:each="error: ${#fields.errors('adminContactNumber')}" th:text="${error}">Invalid value</p>
+								</div>
+							</div>
+						</div>
+						<div class="col mb-3">
+							<label class="form-label" for="txtAdminEmail">Admin Email</label>
+							<input id="txtAdminEmail" class="form-control" type="email" th:field="*{adminEmail}" th:classappend="${not #lists.isEmpty(#fields.errors('adminEmail'))} ? is-invalid">
+							<div class="invalid-feedback">
+								<p th:each="error: ${#fields.errors('adminEmail')}" th:text="${error}">Invalid value</p>
+							</div>
+						</div>
+						<div class="mb-3">
+							<button type="submit" class="btn btn-primary">Save</button>
+							<button type="reset" class="btn btn-primary">Cancel</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="home::foot"></footer>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+		crossorigin="anonymous"></script>
+	<script>
+		function updateRangeValue(value) {
+			document.getElementById('rangeValue').value=value;
+		}
+	</script>
+</body>
+</html>

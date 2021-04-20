@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="ISO-8859-1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<style>
+.border-primary {
+	border-style: solid;
+	border-width: thin;
+	margin: 1em;
+	padding: 1em;
+}
+
+.border-secondary {
+	border-style: solid;
+	border-width: thin;
+	border-color: gray;
+	margin: 1em;
+	padding: 1em;
+}
+
+.border-alert {
+	border-style: solid;
+	border-width: thin;
+	border-color: red;
+	margin: 1em;
+	padding: 1em;
+}
+
+.header-primary {
+	font-family: Georgia;
+	font-weight: bold;
+	text-align: center;
+}
+
+.header-alert {
+	font-weight: bold;
+	color: red;
+}
+
+.footer-secondary {
+	font-style: italic;
+	color: gray;
+	text-align: center;
+}
+
+.table-border {
+	border-collapse: collapse;
+	border-style: solid;
+	border-width: thin;
+}
+
+.table-border th,td {
+	padding:1em;
+}
+
+.table-border th {
+	background-color: gray;
+}
+</style>
+<title>Detection Attachment</title>
+</head>
+<body>
+	<div>
+		<header class="header-primary">
+			<h3>Detection Notification</h3>
+		</header>
+		<div class="border-secondary">
+			<p class="header-alert">IMPORTANT!!!</p>
+			<p>We have detected high temperature. Please refer to the details below:</p>
+			<div>
+				<table class="table-border">
+					<thead>
+						<tr>
+							<th>ID Number</th>
+							<th>First Name</th>
+							<th>Middle Name</th>
+							<th>Last Name</th>
+							<th>Contact Number</th>
+							<th>Email</th>
+							<th>Temperature</th>
+							<th>Area</th>
+							<th>Date and Time</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td th:text="${userProfile.idNumber}"></td>
+							<td th:text="${userProfile.firstName}"></td>
+							<td th:text="${userProfile.middleName}"></td>
+							<td th:text="${userProfile.lastName}"></td>
+							<td th:text="${userProfile.contactNumber}"></td>
+							<td th:text="${userProfile.email}"></td>
+							<td th:text="${temperatureRecord.temperature}"></td>
+							<td th:text="${temperatureRecord.areaCode}"></td>
+							<td th:text="${temperatureRecord.recordDate}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div>
+				<p>User Image</p>
+				<img th:src="*{imageUrl}" style="width: 200px; height:200px"/>
+			</div>
+		</div>
+		<footer class="footer-secondary">
+			<p>Contact Tracing Service 2021</p>
+		</footer>
+	</div>
+</body>
+</html>

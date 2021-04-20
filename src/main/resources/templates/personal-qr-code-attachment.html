@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="ISO-8859-1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<style>
+.border-primary {
+	border-style: solid;
+	border-width: thin;
+	margin: 1em;
+	padding: 1em;
+}
+
+.border-secondary {
+	border-style: solid;
+	border-width: thin;
+	border-color: gray;
+	margin: 1em;
+	padding: 1em;
+}
+
+.border-alert {
+	border-style: solid;
+	border-width: thin;
+	border-color: red;
+	margin: 1em;
+	padding: 1em;
+}
+
+.header-primary {
+	font-family: Georgia;
+	font-weight: bold;
+	text-align: center;
+}
+
+.header-alert {
+	font-weight: bold;
+	color: red;
+}
+
+.footer-secondary {
+	font-style: italic;
+	color: gray;
+	text-align: center;
+}
+
+.table-border {
+	border-collapse: collapse;
+	border-style: solid;
+	border-width: thin;
+	width: 100%;
+}
+
+.table-border th,td {
+	padding:1em;
+}
+
+.table-border th {
+	background-color: gray;
+}
+</style>
+<title>Personal QR Code Attachment</title>
+</head>
+<body>
+	<header class="header-primary">
+		<h3>Contact Tracing Identification QR Code</h3>
+	</header>
+	<div class="border-secondary">
+		<div>
+			<p>Dear Mr/Ms. <span th:text="${firstName}">User</span>,</p>
+			<br/>
+			<p>We are happy to inform you that you have successfully registered your data to the Contact Tracing Service.</p>
+			<p>You may now use this as your personal identification document when using the Contact Tracing facilities.</p>
+			<br/>
+			<p>Thank you and be safe.</p>
+			<br/>
+			<br/>
+			<p>Best Regards,</p>
+			<p>Your Contact Tracing Team</p>
+		</div>
+		<div>
+			<img th:src="*{imageUrl}" style="width: 200px; height:200px"/>
+		</div>
+	</div>
+	<footer class="footer-secondary">
+		<p>Contact Tracing Service 2021</p>
+	</footer>
+</body>
+</html>

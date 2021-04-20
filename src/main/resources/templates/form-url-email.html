@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.border-primary {
+	border-style: solid;
+	border-width: thin;
+	margin: 1em;
+	padding: 1em;
+}
+
+.border-secondary {
+	border-style: solid;
+	border-width: thin;
+	border-color: gray;
+	margin: 1em;
+	padding: 1em;
+}
+
+.border-alert {
+	border-style: solid;
+	border-width: thin;
+	border-color: red;
+	margin: 1em;
+	padding: 1em;
+}
+
+.header-primary {
+	font-family: Georgia;
+	font-weight: bold;
+	text-align: center;
+}
+
+.header-alert {
+	font-weight: bold;
+	color: red;
+}
+
+.footer-secondary {
+	font-style: italic;
+	color: gray;
+	text-align: center;
+}
+
+.table-border {
+	border-collapse: collapse;
+	border-style: solid;
+	border-width: thin;
+	width: 100%;
+}
+
+.table-border th,td {
+	padding:1em;
+}
+
+.table-border th {
+	background-color: gray;
+}
+</style>
+<title>Form URL Email</title>
+</head>
+<body>
+	<div>
+		<header class="header-primary">
+			<h3>Contact Tracing Form URL</h3>
+		</header>
+		<div class="border-secondary">
+			<p>Dear Mr/Ms. <span th:text="${firstName}">User</span>,</p>
+			<p>Please click on this <a href="#" th:href="@{${formUrl}}">link</a> to complete your registration.</p>
+			<p>Thank you and always be safe.</p>
+			<br/>
+			<p>Best Regards,</p>
+			<p>Your Contact Tracing Team</p>
+		</div>
+		<footer class="footer-secondary">
+			<p>Contact Tracing Service 2021</p>
+		</footer>
+	</div>
+</body>
+</html>
