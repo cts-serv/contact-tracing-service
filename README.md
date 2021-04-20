@@ -1,13 +1,13 @@
-#CONTACT TRACING APPLICATION
+# CONTACT TRACING APPLICATION
 
-####Overview  
+#### Overview  
 
 The **Contact Tracing Application** is a project that is intended to help in conducting a company contact tracing activity
  with no physical contact to the users. It involves the physical device with sensors and QR code reader, and the web application which it integrates with.  
   
 This project is for the Web Application. This is created using Java, Springboot and other necessary libraries for the components.
 
-####Functionality  
+#### Functionality  
 - User registration  
 - Admin login  
 - User management (Admin)  
@@ -17,7 +17,7 @@ This project is for the Web Application. This is created using Java, Springboot 
 - Case detection (Through temperature)  
 - Image capture  
   
-####Views  
+#### Views  
 - login  
 - home  
 - contact tracing  
