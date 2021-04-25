@@ -1,6 +1,5 @@
 package com.thesisproject.ct.contacttracingservice.service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -168,8 +167,7 @@ public class UserService {
 	}
 	
 	public List<Detection> getDetections() {
-		List<Detection> detections = new ArrayList<>();
-		temperatureRecordRepository.findAllByDetection(true)
+		return temperatureRecordRepository.findAllByDetection(true)
 								   .stream()
 								   .map(TemperatureRecord::new)
 								   .map(temp -> {
@@ -178,7 +176,6 @@ public class UserService {
 									   detection.setUserProfile(this.getUserProfile(temp.getUserProfileId()));
 									   return detection;
 								   })
-								   .forEach(detections::add);
-		return detections;
+								   .collect(Collectors.toList());
 	}
 }

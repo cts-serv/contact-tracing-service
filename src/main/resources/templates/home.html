@@ -10,7 +10,7 @@
 	crossorigin="anonymous">
 <title>CTS | Admin Home</title>
 </head>
-<body>
+<body style="background-image: url('/images/headerimage.jpg'); background-size: cover; background-repeat: no-repeat;">
 	<nav class="navbar navbar-expand-sm navbar-light bg-light mb-3 shadow" th:fragment="navi">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#" th:href="@{/}">CTS</a>
@@ -22,10 +22,10 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-sm-0">
-					<li class="nav-item"><a class="nav-link" aria-current="page" href="#"  th:href="@{/}">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="#" th:href="@{/usermanagement}">User Manager</a></li>
-					<li class="nav-item"><a class="nav-link" href="#" th:href="@{/applicationsettings}">Application Settings</a></li>
-					<li class="nav-item"><a class="nav-link" href="#" th:href="@{/detectionhistory}">Detection History</a></li>
+					<li class="nav-item"><a class="nav-link" aria-current="page" href="#"  th:href="@{/}"><svg th:replace="svg::home"></svg> Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="#" th:href="@{/usermanagement}"><svg th:replace="svg::people"></svg> User Management</a></li>
+					<li class="nav-item"><a class="nav-link" href="#" th:href="@{/applicationsettings}"><svg th:replace="svg::gear"></svg> Application Settings</a></li>
+					<li class="nav-item"><a class="nav-link" href="#" th:href="@{/detectionhistory}"><svg th:replace="svg::thermometer"></svg> Detection History</a></li>
 				</ul>
 				<form class="d-flex" action="#" th:action="@{/usermanagement/search}" th:object="${searchObject}" method="post">
 					<input class="form-control me-2" type="search" placeholder="Search"
@@ -36,17 +36,33 @@
 		</div>
 	</nav>
 	
-	<div class="container border shadow">
-		<h1 class="text-center mb-3 display-1">Contact Tracing Service</h1>
-		<div class="row">
-			<div class="col-xl-6 text-center">
-				<img class="border mb-3" alt="qrcode" th:src="*{qrCodeImage}">
-			</div>
-			<div class="col-xl-6">
-				<p>Welcome to Contact Tracing Service.</p>
-				<p>Please scan the QR Code to access the User Registration page.</p>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-11">
+				<h1 class="display-5 text-center mb-5 mt-5">CONTACT TRACING SERVICE</h1>
+				<div class="row justify-content-center mb-3">
+					<p class="lead">Welcome to CTS Admin page, you can view and update the user accounts, application settings and detections using the tools.</p>
+					<p class="lead">If you would like to show the QR Code for the registration, please click on the button below.</p> 
+					<button type="button" class="col-8 btn btn-outline-dark btn-sm mt-5 mb-5" data-bs-toggle="modal" data-bs-target="#qrModal">View QR Code</button>
+				</div>
 			</div>
 		</div>
+	</div>
+	
+	<div class="modal" tabindex="-1" id="qrModal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Registration QR Code</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <div class="text-center">
+				<img class="img-fluid" alt="qrcode" th:src="*{qrCodeImage}">
+			</div>
+	      </div>
+	    </div>
+	  </div>
 	</div>
 	
 	<footer class="page-footer font-small text-center mt-4 fixed-bottom" th:fragment="foot">&copy; 2021 Contact Tracing Service</footer>

@@ -12,9 +12,9 @@
 </head>
 <body>
 	<nav th:replace="home::navi"></nav>
-	<div class="container">
+	<div class="container-fluid row justify-content-center">
 		<h3 class="display-3">Detection History</h3>
-		<div class="accordion shadow border" id="detections-list">
+		<div class=" col-12 accordion shadow border mb-3" id="detections-list">
 			<div class="accordion-item"  th:each="detection: ${detections}">
 				<h2 class="accordion-header" th:id="'hdr'+${detection.temperatureRecord.recordId}">
 					<button class="accordion-button collapsed table-responsive" type="button" data-bs-toggle="collapse" th:attr="data-bs-target='#collapse'+${detection.temperatureRecord.recordId},aria-controls='collapse'+${detection.temperatureRecord.recordId}" aria-expanded="false">
@@ -57,7 +57,41 @@
 				</h2>
 				<div th:id="'collapse'+${detection.temperatureRecord.recordId}" th:attr="aria-labelledby='hdr'+${detection.temperatureRecord.recordId}" class="accordion-collapse collapse" data-bs-parent="#detections-list">			
 					<div class="accordion-body bg-secondary">
-						<p>asdfadsfdsaf</p>
+						<table class="table">
+								<thead><tr>
+									<tr>
+										<th scope="col">ID Number</th>
+										<th scope="col">First Name</th>
+										<th scope="col">Middle Name</th>
+										<th scope="col">Last Name</th>
+										<th scope="col">Contact Number</th>
+										<th scope="col">Department</th>
+										<th scope="col">Position</th>
+										<th scope="col">Temperature Record</th>
+										<th scope="col">Area Code</th>
+										<th scope="col">Date/Time</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td th:text="${detection.userProfile.idNumber}"scope="row"></td>
+										<td th:text="${detection.userProfile.firstName}"></td> 
+										<td th:text="${detection.userProfile.middleName}"></td>
+										<td th:text="${detection.userProfile.lastName}"></td>
+										<td th:text="${detection.userProfile.contactNumber}"></td>
+										<td th:text="${detection.userProfile.department}"></td>
+										<td th:text="${detection.userProfile.position}"></td>
+										<td th:text="${detection.temperatureRecord.temperature}"></td>
+										<td th:text="${detection.temperatureRecord.areaCode}"></td>
+										<td th:text="${detection.temperatureRecord.recordDate}"></td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										<td colspan="10">Click to expand</td>
+									</tr>
+								</tfoot>
+							</table>
 					</div>
 				</div>
 			</div>

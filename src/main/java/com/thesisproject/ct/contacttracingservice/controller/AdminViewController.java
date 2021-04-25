@@ -39,7 +39,7 @@ public class AdminViewController {
 	@Autowired
 	private UserService userService;
 	
-	@Value("form.registration")
+	@Value("${form.registration}")
 	private String registrationFormUrl;
 	
 	@GetMapping(path = "/")
