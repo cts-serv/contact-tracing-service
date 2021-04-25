@@ -45,8 +45,11 @@ public class EmailService {
 	private JavaMailSender emailSender;
 
 	@Autowired
-	UserService userService;
-
+	private UserService userService;
+	
+	@Autowired
+	private ApplicationService applicationService;
+	
 	@Value("${form.basepath}")
 	private String baseUrl;
 	
@@ -125,7 +128,9 @@ public class EmailService {
 			FileSystemResource file = new FileSystemResource(attachmentFile);
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
 			helper.setFrom("no-reply-contact-tracing@gmail.com");
-			helper.setTo(userProfile.getEmail());
+			helper.addTo(userProfile.getEmail());
+			helper.addTo(applicationService.getApplicationVariable("adminEmail").getDescription());
+			helper.addTo(applicationService.getApplicationVariable("clinicEmail").getDescription());
 			helper.setSubject("Fever Detection Notification");
 			
 			Context context = new Context();

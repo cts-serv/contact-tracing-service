@@ -50,10 +50,6 @@
 	border-width: thin;
 }
 
-.table-border th,td {
-	padding:1em;
-}
-
 .table-border th {
 	background-color: gray;
 }
@@ -69,37 +65,49 @@
 			<p class="header-alert">IMPORTANT!!!</p>
 			<p>We have detected high temperature. Please refer to the details below:</p>
 			<div>
-				<table class="table-border">
-					<thead>
-						<tr>
-							<th>ID Number</th>
-							<th>First Name</th>
-							<th>Middle Name</th>
-							<th>Last Name</th>
-							<th>Contact Number</th>
-							<th>Email</th>
-							<th>Temperature</th>
-							<th>Area</th>
-							<th>Date and Time</th>
-						</tr>
-					</thead>
+				<table>
 					<tbody>
 						<tr>
+							<td>ID Number:</td>
 							<td th:text="${userProfile.idNumber}"></td>
+						</tr>
+						<tr>
+							<td>First Name:</td>
 							<td th:text="${userProfile.firstName}"></td>
+						</tr>
+						<tr>
+							<td>Middle Name:</td>
 							<td th:text="${userProfile.middleName}"></td>
+						</tr>
+						<tr>
+							<td>Last Name:</td>
 							<td th:text="${userProfile.lastName}"></td>
+						</tr>
+						<tr>
+							<td>Contact Number:</td>
 							<td th:text="${userProfile.contactNumber}"></td>
+						</tr>
+						<tr>
+							<td>Email:</td>
 							<td th:text="${userProfile.email}"></td>
+						</tr>
+						<tr>
+							<td>Temperature:</td>
 							<td th:text="${temperatureRecord.temperature}"></td>
+						</tr>
+						<tr>
+							<td>Area:</td>
 							<td th:text="${temperatureRecord.areaCode}"></td>
+						</tr>
+						<tr>
+							<td>Date and Time</td>
 							<td th:text="${temperatureRecord.recordDate}"></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 			<div>
-				<p>User Image</p>
+				<p>User Image:</p>
 				<img th:src="*{imageUrl}" style="width: 200px; height:200px"/>
 			</div>
 		</div>

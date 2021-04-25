@@ -3,6 +3,7 @@ package com.thesisproject.ct.contacttracingservice.service;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,9 @@ import com.thesisproject.ct.contacttracingservice.model.UserProfile;
 
 @Service
 public class SmsService {
+	
+	@Autowired
+	private ApplicationService applicationService;
 	
 	@Value("${semaphore.messages.url}")
 	private String semaphoreMessagesUrl;
@@ -59,14 +63,14 @@ public class SmsService {
 	}
 	
 	public void sendDetectionSms(UserProfile userProfile) {
-//		SmsObject sms = new SmsObject();
-//		sms.setApikey(this.semaphoreApiKey);
-//		//sms.setSendername(this.senderName);
-//		sms.setNumber("09208252263,09208252263,09208252263");
-//		sms.setMessage("Fever detected, please coordinate with the clinic for further instructions.");
-//		RestTemplate template = new RestTemplate();
-//		HttpEntity<SmsObject> httpEntity = new HttpEntity<>(sms);
-//		String response = template.postForObject(semaphoreMessagesUrl, httpEntity, String.class);
-//		System.out.println(response);
+		SmsObject sms = new SmsObject();
+		sms.setApikey(this.semaphoreApiKey);
+		//sms.setSendername(this.senderName);
+		sms.setNumber(userProfile.getContactNumber() + "," + applicationService.getApplicationVariable("adminContactNumber").getDescription() + "," + applicationService.getApplicationVariable("clinicContactNumber").getDescription());
+		sms.setMessage("Fever detected, please coordinate with the clinic for further instructions.");
+		RestTemplate template = new RestTemplate();
+		HttpEntity<SmsObject> httpEntity = new HttpEntity<>(sms);
+		String response = template.postForObject(semaphoreMessagesUrl, httpEntity, String.class);
+		System.out.println(response);
 	}
 }
