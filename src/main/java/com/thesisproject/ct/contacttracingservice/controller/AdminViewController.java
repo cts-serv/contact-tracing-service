@@ -158,9 +158,8 @@ public class AdminViewController {
 		}
 		
 		try {
-		userService.deleteUserProfile(userProfile.getUserProfileId());
+			userService.deleteUserProfile(userProfile.getUserProfileId());
 		} catch(Exception e) {
-			return "user-management";
 		}
 		return "user-management";
 	}
@@ -233,7 +232,11 @@ public class AdminViewController {
 			return "application-settings";
 		}
 		
-		applicationService.deleteApplicationVariable(applicationVariable);
+		try {
+			applicationService.deleteApplicationVariable(applicationVariable);
+		} catch(Exception e) {
+		}
+		
 		
 		model.addAttribute("validPositions", applicationService.getApplicationVariables("POSITION"));
 		model.addAttribute("validDepartments", applicationService.getApplicationVariables("DEPARTMENT"));
