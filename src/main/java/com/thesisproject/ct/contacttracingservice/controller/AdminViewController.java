@@ -157,7 +157,11 @@ public class AdminViewController {
 			return "user-management";
 		}
 		
+		try {
 		userService.deleteUserProfile(userProfile.getUserProfileId());
+		} catch(Exception e) {
+			return "user-management";
+		}
 		return "user-management";
 	}
 	
