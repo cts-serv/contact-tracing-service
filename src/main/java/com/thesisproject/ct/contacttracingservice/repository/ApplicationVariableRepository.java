@@ -10,4 +10,5 @@ import com.thesisproject.ct.contacttracingservice.entity.ApplicationVariableEnti
 public interface ApplicationVariableRepository extends JpaRepository<ApplicationVariableEntity, UUID> {
 	public List<ApplicationVariableEntity> findAllByVariableGroupAndEnabled(String variableGroup, boolean enabled);
 	public void deleteAllByVariableGroup(String variableGroup);
+	public ApplicationVariableEntity findOneByCode(String code);
 }

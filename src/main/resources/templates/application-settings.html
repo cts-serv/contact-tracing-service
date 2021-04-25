@@ -130,11 +130,21 @@
 					<form class="row row-cols-1 needs-validation border mb-3 mt-3" action="#" th:action="@{/applicationsettings/save}" th:object="${detectionVariable}" method="post" novalidate>
 						<div class="col mb-3 mt-3">
 							<label class="form-label" for="rngDetectionTemperature">Detection Temperature</label>
-							<input type="text" th:field="*{detectionTemperature}" id="rangeValue" disabled>
+							<input type="text" th:field="*{detectionTemperature}" id="rangeValueDetectionTemperature" disabled>
 							<div class="range">
-								<input id="rngDetectionTemperature" class="form-range" type="range" min="36" max="38" step="0.1" onchange="updateRangeValue(this.value);" th:field="*{detectionTemperature}" th:classappend="${not #lists.isEmpty(#fields.errors('detectionTemperature'))} ? is-invalid">
+								<input id="rngDetectionTemperature" class="form-range" type="range" min="36" max="38" step="0.1" onchange="updateRangeValueDetectionTemperature(this.value);" th:field="*{detectionTemperature}" th:classappend="${not #lists.isEmpty(#fields.errors('detectionTemperature'))} ? is-invalid">
 								<div class="invalid-feedback">
 									<p th:each="error: ${#fields.errors('detectionTemperature')}" th:text="${error}">Invalid value</p>
+								</div>
+							</div>
+						</div>
+						<div class="col mb-3 mt-3">
+							<label class="form-label" for="rngDetectionContactThreshold">Detection Contact Time Threshold (minutes)</label>
+							<input type="text" th:field="*{detectionContactThreshold}" id="rangeValueDetectionContactThreshold" disabled>
+							<div class="range">
+								<input id="rngDetectionContactThreshold" class="form-range" type="range" min="1" max="60" step="1" onchange="updateRangeValueDetectionContactThreshold(this.value);" th:field="*{detectionContactThreshold}" th:classappend="${not #lists.isEmpty(#fields.errors('detectionContactThreshold'))} ? is-invalid">
+								<div class="invalid-feedback">
+									<p th:each="error: ${#fields.errors('detectionContactThreshold')}" th:text="${error}">Invalid value</p>
 								</div>
 							</div>
 						</div>
@@ -187,8 +197,11 @@
 		integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
 		crossorigin="anonymous"></script>
 	<script>
-		function updateRangeValue(value) {
-			document.getElementById('rangeValue').value=value;
+		function updateRangeValueDetectionTemperature(value) {
+			document.getElementById('rangeValueDetectionTemperature').value=value;
+		}
+		function updateRangeValueDetectionContactThreshold(value) {
+			document.getElementById('rangeValueDetectionContactThreshold').value=value;
 		}
 	</script>
 </body>

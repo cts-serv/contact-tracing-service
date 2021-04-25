@@ -13,6 +13,7 @@ public class DetectionVariable {
 	private String adminEmail;
 	private String adminContactNumber;
 	private Double detectionTemperature;
+	private Integer detectionContactThreshold;
 	
 	public DetectionVariable(List<ApplicationVariable> applicationVariable) {
 		this.clinicEmail = applicationVariable.stream().filter(var -> "clinicEmail".equals(var.getCode())).findFirst().map(ApplicationVariable::getDescription).orElse(null);
@@ -20,5 +21,7 @@ public class DetectionVariable {
 		this.adminEmail = applicationVariable.stream().filter(var -> "adminEmail".equals(var.getCode())).findFirst().map(ApplicationVariable::getDescription).orElse(null);
 		this.adminContactNumber = applicationVariable.stream().filter(var -> "adminContactNumber".equals(var.getCode())).findFirst().map(ApplicationVariable::getDescription).orElse(null);
 		this.detectionTemperature = applicationVariable.stream().filter(var -> "detectionTemperature".equals(var.getCode())).findFirst().map(ApplicationVariable::getDescription).map(Double::parseDouble).orElse(null);
+		this.detectionContactThreshold = applicationVariable.stream().filter(var -> "detectionContactThreshold".equals(var.getCode())).findFirst().map(ApplicationVariable::getDescription).map(Integer::parseInt).orElse(null);
+		
 	}
 }

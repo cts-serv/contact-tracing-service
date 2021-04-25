@@ -1,5 +1,6 @@
 package com.thesisproject.ct.contacttracingservice.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,4 +13,5 @@ import com.thesisproject.ct.contacttracingservice.entity.TemperatureRecordEntity
 public interface TemperatureRecordRepository extends JpaRepository<TemperatureRecordEntity, UUID>{
 	public List<TemperatureRecordEntity> findAllByUserProfileId(UUID userProfileId);
 	public List<TemperatureRecordEntity> findAllByDetection(boolean detection);
+	public List<TemperatureRecordEntity> findAllByRecordDateBetweenAndUserProfileIdNot(LocalDateTime dateTimeBefore, LocalDateTime dateTimeAfter, UUID userProfileIdNot);
 }

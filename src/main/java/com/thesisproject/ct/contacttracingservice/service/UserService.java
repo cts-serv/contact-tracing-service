@@ -1,5 +1,6 @@
 package com.thesisproject.ct.contacttracingservice.service;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -8,7 +9,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -46,9 +46,6 @@ public class UserService {
 	
 	@Autowired
 	private EmailService emailService;
-	
-	@Value("${cts.detection.temperature}")
-	private String detectionTemperature;
 	
 	public List<UserProfile> getUserProfiles(String filter) {
 		List<UserProfileEntity> entities = Optional.ofNullable(filter)
@@ -152,8 +149,9 @@ public class UserService {
 	}
 	
 	public TemperatureRecord verifyDetection(TemperatureRecord temperatureRecord, MultipartFile imageFile) {
+		Double detectionTemperature = Double.parseDouble(applicationService.getApplicationVariable("detectionTemperature").getDescription());
 		Optional.ofNullable(temperatureRecord)
-				.filter(temp -> Double.parseDouble(this.detectionTemperature) <= temp.getTemperature())
+				.filter(temp -> detectionTemperature <= temp.getTemperature())
 				.ifPresent(temp -> {
 					UserProfile userProfile = this.getUserProfile(temp.getUserProfileId());
 					smsService.sendDetectionSms(userProfile);
@@ -170,12 +168,23 @@ public class UserService {
 		return temperatureRecordRepository.findAllByDetection(true)
 								   .stream()
 								   .map(TemperatureRecord::new)
-								   .map(temp -> {
-									   Detection detection = new Detection();
-									   detection.setTemperatureRecord(temp);
-									   detection.setUserProfile(this.getUserProfile(temp.getUserProfileId()));
-									   return detection;
-								   })
+								   .map(Detection::new)
+								   .map(this::getDetectionPersonDetails)
 								   .collect(Collectors.toList());
+	}
+	
+	public Detection getDetectionPersonDetails(Detection detection) {
+		detection.setUserProfile(this.getUserProfile(detection.getTemperatureRecord().getUserProfileId()));
+		Integer detectionContactThreshold = Integer.parseInt(applicationService.getApplicationVariable("detectionContactThreshold").getDescription());
+		LocalDateTime dateTimeBefore = detection.getTemperatureRecord().getRecordDate().minusMinutes(detectionContactThreshold);
+		LocalDateTime dateTimeAfter = detection.getTemperatureRecord().getRecordDate().plusMinutes(detectionContactThreshold);
+		List<UserProfile> contactedUsers = temperatureRecordRepository.findAllByRecordDateBetweenAndUserProfileIdNot(dateTimeBefore, dateTimeAfter, detection.getTemperatureRecord().getUserProfileId())
+																	  .stream()
+																	  .map(TemperatureRecord::new)
+																	  .map(TemperatureRecord::getUserProfileId)
+																	  .map(this::getUserProfile)
+																	  .collect(Collectors.toList());
+		detection.getContactedUsers().addAll(contactedUsers);
+		return detection;
 	}
 }

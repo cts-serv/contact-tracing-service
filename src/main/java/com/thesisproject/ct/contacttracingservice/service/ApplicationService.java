@@ -27,6 +27,9 @@ public class ApplicationService {
 	@Value("${cts.detection.temperature}")
 	private String detectionTemperature;
 	
+	@Value("${cts.detection.contactthreshold}")
+	private String detectionContactThreshold;
+	
 	@Value("${cts.clinic.number}")
 	private String clinicContactNumber;
 	
@@ -44,6 +47,12 @@ public class ApplicationService {
 									   .stream()
 									   .map(ApplicationVariable::new)
 									   .collect(Collectors.toList());
+	}
+	
+	public ApplicationVariable getApplicationVariable(String code) {
+		return Optional.ofNullable(applicationVariableRepository.findOneByCode(code))
+					   .map(ApplicationVariable::new)
+					   .orElse(null);			
 	}
 	
 	public Map<String, String> getApplicationVariablesKeyValue(String variableGroup) {
@@ -106,6 +115,13 @@ public class ApplicationService {
 		entity.setVariableGroup("DETECTION VARIABLE");
 		entityList.add(entity);
 		
+		entity = new ApplicationVariableEntity();
+		entity.setCode("detectionContactThreshold");
+		entity.setDescription(String.valueOf(detectionVariable.getDetectionContactThreshold()));
+		entity.setEnabled(true);
+		entity.setVariableGroup("DETECTION VARIABLE");
+		entityList.add(entity);
+		
 		applicationVariableRepository.deleteAllByVariableGroup("DETECTION VARIABLE");
 		applicationVariableRepository.saveAll(entityList);
 		return detectionVariable;
@@ -143,6 +159,7 @@ public class ApplicationService {
 		
 		Map<String, String> detectionVariablesMap = new HashMap<>();
 		detectionVariablesMap.put("detectionTemperature", this.detectionTemperature);
+		detectionVariablesMap.put("detectionContactThreshold", this.detectionContactThreshold);
 		detectionVariablesMap.put("clinicContactNumber", this.clinicContactNumber);
 		detectionVariablesMap.put("clinicEmail", this.clinicEmail);
 		detectionVariablesMap.put("adminContactNumber", this.adminContactNumber);

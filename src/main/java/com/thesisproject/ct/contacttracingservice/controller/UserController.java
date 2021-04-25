@@ -20,10 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.thesisproject.ct.contacttracingservice.error.BadRequestException;
 import com.thesisproject.ct.contacttracingservice.error.NotFoundException;
+import com.thesisproject.ct.contacttracingservice.model.Detection;
 import com.thesisproject.ct.contacttracingservice.model.TemperatureRecord;
 import com.thesisproject.ct.contacttracingservice.model.UserProfile;
 import com.thesisproject.ct.contacttracingservice.service.EmailService;
-import com.thesisproject.ct.contacttracingservice.service.SmsService;
 import com.thesisproject.ct.contacttracingservice.service.UserService;
 
 import io.swagger.v3.oas.annotations.Parameter;
@@ -38,9 +38,6 @@ public class UserController {
 	
 	@Autowired
 	private EmailService emailService;
-	
-	@Autowired
-	private SmsService smsService;
 	
 	@PostMapping(path = "/export")
 	public ResponseEntity<List<UserProfile>> exportUsers() {
@@ -81,8 +78,8 @@ public class UserController {
 		return ResponseEntity.ok().body(userService.postTemperatureRecord(userProfileId, temperatureRecord, imageFile));
 	}
 	
-	@GetMapping(path = "test")
-	public void testSms() {
-		smsService.sendRegistrationCompletionSms(null);
+	@GetMapping(path = "/detections", produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Detection>> getDetections() {
+		return ResponseEntity.ok(userService.getDetections());
 	}
 }
