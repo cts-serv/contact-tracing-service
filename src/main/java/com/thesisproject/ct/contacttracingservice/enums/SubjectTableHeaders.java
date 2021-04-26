@@ -1,7 +1,7 @@
 package com.thesisproject.ct.contacttracingservice.enums;
 
 public enum SubjectTableHeaders {
-	SUBJECT_ID,
+	USER_PROFILE_ID,
 	FIRST_NAME,
 	MIDDLE_NAME,
 	LAST_NAME,
