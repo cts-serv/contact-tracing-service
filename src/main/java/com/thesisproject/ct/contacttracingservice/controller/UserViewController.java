@@ -111,7 +111,7 @@ public class UserViewController {
 		model.addAttribute("validPositions", applicationService.getApplicationVariablesKeyValue("POSITION"));
 		model.addAttribute("validDepartments", applicationService.getApplicationVariablesKeyValue("DEPARTMENT"));
 		model.addAttribute("userProfile", userProfile);
-		if(!userService.getUserProfile(userProfile.getUserProfileId()).getOtp().equals(userProfile.getOtp()) && !result.hasFieldErrors("otp")) {
+		if(null == userService.getUserProfile(userProfile.getUserProfileId()).getOtp() || !userService.getUserProfile(userProfile.getUserProfileId()).getOtp().equals(userProfile.getOtp()) && !result.hasFieldErrors("otp")) {
 			result.addError(new FieldError("userProfile", "otp", "Invalid OTP"));
 		}
 		

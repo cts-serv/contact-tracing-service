@@ -23,6 +23,7 @@ import com.thesisproject.ct.contacttracingservice.model.DetectionVariable;
 import com.thesisproject.ct.contacttracingservice.model.SearchObject;
 import com.thesisproject.ct.contacttracingservice.model.UserProfile;
 import com.thesisproject.ct.contacttracingservice.service.ApplicationService;
+import com.thesisproject.ct.contacttracingservice.service.EmailService;
 import com.thesisproject.ct.contacttracingservice.service.UserService;
 import com.thesisproject.ct.contacttracingservice.util.QRCodeUtility;
 
@@ -42,10 +43,22 @@ public class AdminViewController {
 	@Value("${form.registration}")
 	private String registrationFormUrl;
 	
+	@Autowired
+	private EmailService emailService;
+	
 	@GetMapping(path = "/")
 	public String getHome(SearchObject searchObject,
 						  ModelMap model) {
 		
+		model.addAttribute("qrCodeImage", "data:image/png;base64," + Base64.getEncoder().encodeToString(QRCodeUtility.generateQRCode(registrationFormUrl, 500, 500)));
+		return "home";
+	}
+	
+	@GetMapping(path = "/sendreport")
+	public String postTriggerEmailReport(SearchObject searchObject,
+						  ModelMap model) {
+		
+		emailService.sendUserProfilesReport();
 		model.addAttribute("qrCodeImage", "data:image/png;base64," + Base64.getEncoder().encodeToString(QRCodeUtility.generateQRCode(registrationFormUrl, 500, 500)));
 		return "home";
 	}

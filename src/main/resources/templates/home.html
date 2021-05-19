@@ -26,6 +26,7 @@
 					<li class="nav-item"><a class="nav-link" href="#" th:href="@{/usermanagement}"><svg th:replace="svg::people"></svg> User Management</a></li>
 					<li class="nav-item"><a class="nav-link" href="#" th:href="@{/applicationsettings}"><svg th:replace="svg::gear"></svg> Application Settings</a></li>
 					<li class="nav-item"><a class="nav-link" href="#" th:href="@{/detectionhistory}"><svg th:replace="svg::thermometer"></svg> Detection History</a></li>
+					<li class="nav-item"><a class="nav-link" href="#" th:href="@{/sendreport}"><svg th:replace="svg::mail"></svg> Send User Report</a></li>
 				</ul>
 				<form class="d-flex" action="#" th:action="@{/usermanagement/search}" th:object="${searchObject}" method="post">
 					<input class="form-control me-2" type="search" placeholder="Search"
