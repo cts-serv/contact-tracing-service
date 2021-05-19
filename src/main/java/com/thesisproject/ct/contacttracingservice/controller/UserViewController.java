@@ -92,7 +92,11 @@ public class UserViewController {
 			                      UserProfile userProfile,
 			                      BindingResult result,
 			                      ModelMap model) {
-		userProfile.setOtp(smsService.sendOTP(userProfile).getCode());
+		try {
+			userProfile.setOtp(smsService.sendOTP(userProfile).getCode());
+		} catch (Exception e) {
+			result.addError(new FieldError("userProfile", "contactNumber", "Unable to Send OTP. Please check mobile number."));
+		}
 		userService.postUserProfile(userProfile);
 		
 		userProfile.setOtp(null);
@@ -111,7 +115,7 @@ public class UserViewController {
 		model.addAttribute("validPositions", applicationService.getApplicationVariablesKeyValue("POSITION"));
 		model.addAttribute("validDepartments", applicationService.getApplicationVariablesKeyValue("DEPARTMENT"));
 		model.addAttribute("userProfile", userProfile);
-		if(null == userService.getUserProfile(userProfile.getUserProfileId()).getOtp() || !userService.getUserProfile(userProfile.getUserProfileId()).getOtp().equals(userProfile.getOtp()) && !result.hasFieldErrors("otp")) {
+		if(null != userService.getUserProfile(userProfile.getUserProfileId()).getOtp() && !userService.getUserProfile(userProfile.getUserProfileId()).getOtp().equals(userProfile.getOtp()) && !result.hasFieldErrors("otp")) {
 			result.addError(new FieldError("userProfile", "otp", "Invalid OTP"));
 		}
 		
