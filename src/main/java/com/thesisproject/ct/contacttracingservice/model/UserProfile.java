@@ -23,7 +23,7 @@ public class UserProfile extends UserRegistration{
 	@Size(min = 2, max = 50, message = "Please enter value with 2 to 50 characters.")
 	private String middleName;
 	
-	@Size(min = 6, max = 6, message = "Please enter a valid ID number.")
+	@Size(min = 6, max = 6, message = "Please enter a valid 6-digit ID number.")
 	private String idNumber;
 	
 	@Size(min = 10, max = 10, message = "Please enter a valid contact number.")

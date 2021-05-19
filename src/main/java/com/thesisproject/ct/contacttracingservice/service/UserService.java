@@ -187,4 +187,12 @@ public class UserService {
 		detection.getContactedUsers().addAll(contactedUsers);
 		return detection;
 	}
+	
+	public UserProfile getUserProfileByIdNumber(String idNumber)  {
+		return userProfileRepository.findByIdNumber(idNumber)
+								.map(UserProfile::new)
+								.map(this::populateUserProfileTemperatureRecords)
+								.map(this::populateDepartmentAndPosition)
+					   			.orElse(new UserProfile());
+	}
 }

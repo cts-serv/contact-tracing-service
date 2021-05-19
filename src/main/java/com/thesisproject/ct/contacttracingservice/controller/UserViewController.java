@@ -80,6 +80,7 @@ public class UserViewController {
 		}
 		
 		userProfile = userService.getUserProfile(form.getUserRegistration().getUserProfileId());
+		userProfile.setOtp(null);
 		model.addAttribute("validPositions", applicationService.getApplicationVariablesKeyValue("POSITION"));
 		model.addAttribute("validDepartments", applicationService.getApplicationVariablesKeyValue("DEPARTMENT"));
 		model.addAttribute("userProfile", userProfile);
@@ -97,8 +98,21 @@ public class UserViewController {
 		} catch (Exception e) {
 			result.addError(new FieldError("userProfile", "contactNumber", "Unable to Send OTP. Please check mobile number."));
 		}
-		userService.postUserProfile(userProfile);
 		
+		if(null != userProfile.getContactNumber() && userProfile.getContactNumber().length() != 10 && !result.hasFieldErrors("contactNumber")) {
+			result.addError(new FieldError("userProfile", "contactNumber", "Unable to Send OTP. Please check mobile number."));
+		}
+		
+		if(result.hasErrors()) {
+			model.addAttribute("validPositions", applicationService.getApplicationVariablesKeyValue("POSITION"));
+			model.addAttribute("validDepartments", applicationService.getApplicationVariablesKeyValue("DEPARTMENT"));
+			model.addAttribute("userProfile", userProfile);
+			return "user-profile";
+		}
+		String idNumber = userProfile.getIdNumber();
+		userProfile.setIdNumber(null);
+		userService.postUserProfile(userProfile);
+		userProfile.setIdNumber(idNumber);
 		userProfile.setOtp(null);
 		model.addAttribute("validPositions", applicationService.getApplicationVariablesKeyValue("POSITION"));
 		model.addAttribute("validDepartments", applicationService.getApplicationVariablesKeyValue("DEPARTMENT"));
@@ -117,6 +131,10 @@ public class UserViewController {
 		model.addAttribute("userProfile", userProfile);
 		if(null != userService.getUserProfile(userProfile.getUserProfileId()).getOtp() && !userService.getUserProfile(userProfile.getUserProfileId()).getOtp().equals(userProfile.getOtp()) && !result.hasFieldErrors("otp")) {
 			result.addError(new FieldError("userProfile", "otp", "Invalid OTP"));
+		}
+		
+		if(null != userService.getUserProfileByIdNumber(userProfile.getIdNumber()) && !result.hasFieldErrors("idNumber")) {
+			result.addError(new FieldError("userProfile", "idNumber", "Duplicate entry. ID Number already exists."));
 		}
 		
 		if(result.hasErrors()) {
