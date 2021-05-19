@@ -93,14 +93,15 @@ public class UserViewController {
 			                      UserProfile userProfile,
 			                      BindingResult result,
 			                      ModelMap model) {
-		try {
-			userProfile.setOtp(smsService.sendOTP(userProfile).getCode());
-		} catch (Exception e) {
-			result.addError(new FieldError("userProfile", "contactNumber", "Unable to Send OTP. Please check mobile number."));
-		}
 		
 		if(null != userProfile.getContactNumber() && userProfile.getContactNumber().length() != 10 && !result.hasFieldErrors("contactNumber")) {
 			result.addError(new FieldError("userProfile", "contactNumber", "Unable to Send OTP. Please check mobile number."));
+		} else {
+			try {
+				userProfile.setOtp(smsService.sendOTP(userProfile).getCode());
+			} catch (Exception e) {
+				result.addError(new FieldError("userProfile", "contactNumber", "Unable to Send OTP. Please check mobile number."));
+			}
 		}
 		
 		if(result.hasErrors()) {
