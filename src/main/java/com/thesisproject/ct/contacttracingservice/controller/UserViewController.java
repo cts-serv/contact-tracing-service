@@ -104,6 +104,7 @@ public class UserViewController {
 		}
 		
 		if(result.hasErrors()) {
+			userProfile.setOtp(null);
 			model.addAttribute("validPositions", applicationService.getApplicationVariablesKeyValue("POSITION"));
 			model.addAttribute("validDepartments", applicationService.getApplicationVariablesKeyValue("DEPARTMENT"));
 			model.addAttribute("userProfile", userProfile);
@@ -113,6 +114,7 @@ public class UserViewController {
 		userProfile.setIdNumber(null);
 		userService.postUserProfile(userProfile);
 		userProfile.setIdNumber(idNumber);
+		
 		userProfile.setOtp(null);
 		model.addAttribute("validPositions", applicationService.getApplicationVariablesKeyValue("POSITION"));
 		model.addAttribute("validDepartments", applicationService.getApplicationVariablesKeyValue("DEPARTMENT"));
