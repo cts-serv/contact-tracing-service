@@ -136,7 +136,7 @@ public class UserViewController {
 			result.addError(new FieldError("userProfile", "otp", "Invalid OTP"));
 		}
 		
-		if(null != userService.getUserProfileByIdNumber(userProfile.getIdNumber()) && !result.hasFieldErrors("idNumber")) {
+		if(null != userService.getUserProfileByIdNumber(userProfile.getIdNumber()) && null != userService.getUserProfileByIdNumber(userProfile.getIdNumber()).getFirstName() && !result.hasFieldErrors("idNumber")) {
 			result.addError(new FieldError("userProfile", "idNumber", "Duplicate entry. ID Number already exists."));
 		}
 		
