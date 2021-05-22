@@ -94,7 +94,7 @@
 			</div>
 			<div class="col mb-3">
 				<label class="form-label" for="slcProcess">Process</label>
-				<select id="slcProcess" class="form-select" th:field="*{position}" th:classappend="${not #lists.isEmpty(#fields.errors('process'))} ? is-invalid">
+				<select id="slcProcess" class="form-select" th:field="*{process}" th:classappend="${not #lists.isEmpty(#fields.errors('process'))} ? is-invalid">
 					<option value="" selected>--</option>
 					<option th:each="pro: ${validProcess}" th:value="${pro.key}" th:text="${pro.value}">--</option>
 				</select>
