@@ -28,6 +28,7 @@
 							<th scope="col">Contact Number</th>
 							<th scope="col">Department</th>
 							<th scope="col">Position</th>
+							<th scope="col">Process</th>
 							<th scope="col">Last Temperature Record</th>
 							<th scope="col"></th>
 						</tr>
@@ -41,6 +42,7 @@
 							<td th:text="${userProfile.contactNumber}"></td>
 							<td th:text="${userProfile.department}"></td>
 							<td th:text="${userProfile.position}"></td>
+							<td th:text="${userProfile.process}"></td>
 							<td th:text="${userProfile.lastTemperatureRecord}"></td>
 							<td>
 								<form class="needs-validation" action="#" th:action="@{/usermanagement/edit}" th:object="${userProfile}" method="post">
@@ -119,6 +121,16 @@
 						<p th:each="error: ${#fields.errors('position')}" th:text="${error}">Invalid value</p>
 					</div>
 				</div>
+				<div class="col mb-3">
+				<label class="form-label" for="slcProcess">Process</label>
+				<select id="slcProcess" class="form-select" th:field="*{process}" th:classappend="${not #lists.isEmpty(#fields.errors('process'))} ? is-invalid">
+					<option value="" selected>--</option>
+					<option th:each="pro: ${validProcess}" th:value="${pro.key}" th:text="${pro.value}">--</option>
+				</select>
+				<div class="invalid-feedback">
+					<p th:each="error: ${#fields.errors('process')}" th:text="${error}">Invalid value</p>
+				</div>
+			</div>
 				<div class="col mb-3">
 					<input id="hdnUserAgreement" type="hidden" th:field="*{userAgreementAccepted}">
 					<input id="hdnUserProfileId" type="hidden" th:field="*{userProfileId}">
