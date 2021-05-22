@@ -153,31 +153,30 @@
 						</tbody>
 					</table>
 				</div>
-			</div>
-			
-			<div class="col-11 col-md-4 mt-3 mb-3">
-				<form class="row row-cols-1 needs-validation border" action="#" th:action="@{/applicationsettings/add}" th:object="${applicationVariable}" method="post" novalidate>
-					<p class="mt-3">Add a Process value.</p>
-					<div class="col mb-3">
-						<label class="form-label" for="txtCode">Code</label>
-						<input id="txtCode" class="form-control" type="text" th:field="*{code}" th:classappend="${not #lists.isEmpty(#fields.errors('code'))} ? is-invalid">
-						<div class="invalid-feedback">
-							<p th:each="error: ${#fields.errors('code')}" th:text="${error}">Invalid value</p>
+				<div class="col-11 col-md-4 mt-3 mb-3">
+					<form class="row row-cols-1 needs-validation border" action="#" th:action="@{/applicationsettings/add}" th:object="${applicationVariable}" method="post" novalidate>
+						<p class="mt-3">Add a Process value.</p>
+						<div class="col mb-3">
+							<label class="form-label" for="txtCode">Code</label>
+							<input id="txtCode" class="form-control" type="text" th:field="*{code}" th:classappend="${not #lists.isEmpty(#fields.errors('code'))} ? is-invalid">
+							<div class="invalid-feedback">
+								<p th:each="error: ${#fields.errors('code')}" th:text="${error}">Invalid value</p>
+							</div>
 						</div>
-					</div>
-					<div class="col mb-3">
-						<label class="form-label" for="txtDescription">Description</label>
-						<input id="txtDescription" class="form-control" type="text" th:field="*{description}" th:classappend="${not #lists.isEmpty(#fields.errors('description'))} ? is-invalid">
-						<div class="invalid-feedback">
-							<p th:each="error: ${#fields.errors('description')}" th:text="${error}">Invalid value</p>
+						<div class="col mb-3">
+							<label class="form-label" for="txtDescription">Description</label>
+							<input id="txtDescription" class="form-control" type="text" th:field="*{description}" th:classappend="${not #lists.isEmpty(#fields.errors('description'))} ? is-invalid">
+							<div class="invalid-feedback">
+								<p th:each="error: ${#fields.errors('description')}" th:text="${error}">Invalid value</p>
+							</div>
 						</div>
-					</div>
-					<div class="col mb-3">
-						<input type="hidden" value="true" name="enabled">
-						<input type="hidden" value="PROCESS" name="variableGroup">
-						<button type="submit" class="btn btn-primary">Add</button>
-					</div>
-				</form>
+						<div class="col mb-3">
+							<input type="hidden" value="true" name="enabled">
+							<input type="hidden" value="PROCESS" name="variableGroup">
+							<button type="submit" class="btn btn-primary">Add</button>
+						</div>
+					</form>
+				</div>
 			</div>
 			
 			
