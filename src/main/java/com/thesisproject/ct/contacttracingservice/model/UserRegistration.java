@@ -17,10 +17,10 @@ public class UserRegistration {
 	
 	private UUID userProfileId;
 	
-	@Pattern(regexp = "^[a-zA-Z\s]{2,50}$", message = "Invalid first name.")
+	@Pattern(regexp = "^[a-zA-Z\\s]{2,50}$", message = "Invalid first name.")
 	private String firstName;
 	
-	@Pattern(regexp = "^[a-zA-Z\s]{2,50}$", message = "Invalid last name.")
+	@Pattern(regexp = "^[a-zA-Z\\s]{2,50}$", message = "Invalid last name.")
 	private String lastName;
 	
 	@Size(min = 1, message = "Invalid email.")
