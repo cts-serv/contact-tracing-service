@@ -150,6 +150,20 @@ public class ApplicationService {
 		validDepartmentMap.put("VSTR", "Visitor");
 		validDepartmentMap.put("OPCT", "Operation Control");
 		validDepartmentMap.put("MNCT", "Manufacturing Control");
+		
+		Map<String, String> validProcessMap = new HashMap<>();
+		validProcessMap.put("DC", "DC");
+		validProcessMap.put("DB", "DB");
+		validProcessMap.put("WB", "WB");
+		validProcessMap.put("MP", "MP");
+		validProcessMap.put("PL", "PL");
+		validProcessMap.put("ATC", "ATC");
+		validProcessMap.put("FL", "FL");
+		validProcessMap.put("FT", "FT");
+		validProcessMap.put("TP", "TP");
+		validProcessMap.put("SH", "SH");
+		validProcessMap.put("PQD", "PQD");
+		validProcessMap.put("ENGG", "ENGG");
 
 		Map<String, String> validAreaCodeMap = new HashMap<>();
 		validAreaCodeMap.put("0001", "Area 0001");
@@ -178,6 +192,14 @@ public class ApplicationService {
 			ApplicationVariableEntity var = new ApplicationVariableEntity();
 			var.setEnabled(true);
 			var.setVariableGroup("DEPARTMENT");
+			var.setCode(key);
+			var.setDescription(value);
+			applicationVariableRepository.save(var);
+		});
+		validProcessMap.forEach((key, value) -> {
+			ApplicationVariableEntity var = new ApplicationVariableEntity();
+			var.setEnabled(true);
+			var.setVariableGroup("PROCESS");
 			var.setCode(key);
 			var.setDescription(value);
 			applicationVariableRepository.save(var);

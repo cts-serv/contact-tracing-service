@@ -30,7 +30,7 @@
 			</div>
 			<div class="col-md-4 mb-3">
 				<label class="form-label" for="txtFirstName">First Name</label>
-				<input id="txtFirstName" type="text" class="form-control" placeholder="Juan" th:field="*{firstName}" th:value="${userProfile.firstName}" th:classappend="${not #lists.isEmpty(#fields.errors('firstName'))} ? is-invalid">
+				<input id="txtFirstName" type="text" class="form-control" placeholder="Juan" th:field="*{firstName}" th:value="${userProfile.firstName}" th:classappend="${not #lists.isEmpty(#fields.errors('firstName'))} ? is-invalid" readonly>
 				<div class="invalid-feedback">
 					<p th:each="error: ${#fields.errors('firstName')}" th:text="${error}">Invalid value</p>
 				</div>
@@ -44,7 +44,7 @@
 			</div>
 			<div class="col-md-4 mb-3">
 				<label class="form-label" for="txtLastName">Last Name</label>
-				<input id="txtLastName" type="text" class="form-control" placeholder="Dela Cruz" th:field="*{lastName}" th:value="${userProfile.lastName}" th:classappend="${not #lists.isEmpty(#fields.errors('lastName'))} ? is-invalid">
+				<input id="txtLastName" type="text" class="form-control" placeholder="Dela Cruz" th:field="*{lastName}" th:value="${userProfile.lastName}" th:classappend="${not #lists.isEmpty(#fields.errors('lastName'))} ? is-invalid" readonly>
 				<div class="invalid-feedback">
 					<p th:each="error: ${#fields.errors('lastName')}" th:text="${error}">Invalid value</p>
 				</div>
@@ -67,7 +67,7 @@
 			</div>
 			<div class="col-md-8 mb-3">
 				<label class="form-label" for="emlEmail">Email</label>
-				<input id="emlEmail" type="email" class="form-control" placeholder="juan.dela.cruz@domain.com" th:field="*{email}" th:value="${userProfile.email}" th:classappend="${not #lists.isEmpty(#fields.errors('email'))} ? is-invalid">
+				<input id="emlEmail" type="email" class="form-control" placeholder="juan.dela.cruz@domain.com" th:field="*{email}" th:value="${userProfile.email}" th:classappend="${not #lists.isEmpty(#fields.errors('email'))} ? is-invalid" readonly>
 				<div class="invalid-feedback">
 					<p th:each="error: ${#fields.errors('email')}" th:text="${error}">Invalid value</p>
 				</div>
@@ -90,6 +90,16 @@
 				</select>
 				<div class="invalid-feedback">
 					<p th:each="error: ${#fields.errors('position')}" th:text="${error}">Invalid value</p>
+				</div>
+			</div>
+			<div class="col mb-3">
+				<label class="form-label" for="slcProcess">Process</label>
+				<select id="slcProcess" class="form-select" th:field="*{position}" th:classappend="${not #lists.isEmpty(#fields.errors('process'))} ? is-invalid">
+					<option value="" selected>--</option>
+					<option th:each="pro: ${validProcess}" th:value="${pro.key}" th:text="${pro.value}">--</option>
+				</select>
+				<div class="invalid-feedback">
+					<p th:each="error: ${#fields.errors('process')}" th:text="${error}">Invalid value</p>
 				</div>
 			</div>
 			<div class="col mb-3">

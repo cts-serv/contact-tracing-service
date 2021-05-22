@@ -63,6 +63,9 @@ public class UserProfileEntity {
 	@Column(name = "department", nullable = true)
 	private String department;
 	
+	@Column(name = "process", nullable = true)
+	private String process;
+	
 	@Column(name = "user_agreement", nullable = true)
 	private boolean userAgreementAccepted;
 	
@@ -82,15 +85,16 @@ public class UserProfileEntity {
 	
 	public UserProfileEntity(UserProfile userProfile) {
 		this.userProfileId  = userProfile.getUserProfileId();
-		this.firstName = StringUtils.capitalize(userProfile.getFirstName());
-		this.middleName = StringUtils.capitalize(userProfile.getMiddleName());
-		this.lastName = StringUtils.capitalize(userProfile.getLastName());
+		this.firstName = StringUtils.capitalize(userProfile.getFirstName().toLowerCase());
+		this.middleName = StringUtils.capitalize(userProfile.getMiddleName().toLowerCase());
+		this.lastName = StringUtils.capitalize(userProfile.getLastName().toLowerCase());
 		this.idNumber = userProfile.getIdNumber();
 		this.contactNumber = userProfile.getContactNumber();
 		this.otp = userProfile.getOtp();
 		this.email = userProfile.getEmail().toLowerCase();
 		this.position = userProfile.getPosition();
 		this.department = userProfile.getDepartment();
+		this.process = userProfile.getProcess();
 		this.userAgreementAccepted = userProfile.isUserAgreementAccepted();
 	}
 	
