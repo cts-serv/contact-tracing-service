@@ -59,6 +59,7 @@ public class UserProfile extends UserRegistration{
 		this.otp = entity.getOtp();
 		this.position = entity.getPosition();
 		this.department = entity.getDepartment();
+		this.process = entity.getProcess();
 		this.userAgreementAccepted = entity.isUserAgreementAccepted();
 		this.temperatureRecords = new ArrayList<>();
 	}
