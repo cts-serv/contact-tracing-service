@@ -191,7 +191,7 @@ public class AdminViewController {
 		
 		model.addAttribute("validPositions", applicationService.getApplicationVariables("POSITION"));
 		model.addAttribute("validDepartments", applicationService.getApplicationVariables("DEPARTMENT"));
-		model.addAttribute("validProcess", applicationService.getApplicationVariablesKeyValue("PROCESS"));
+		model.addAttribute("validProcess", applicationService.getApplicationVariables("PROCESS"));
 		model.addAttribute("detectionVariable", new DetectionVariable(applicationService.getApplicationVariables("DETECTION VARIABLE")));
 		return "application-settings";
 	}
@@ -205,7 +205,7 @@ public class AdminViewController {
 		if(result.hasErrors()) {
 			model.addAttribute("validPositions", applicationService.getApplicationVariables("POSITION"));
 			model.addAttribute("validDepartments", applicationService.getApplicationVariables("DEPARTMENT"));
-			model.addAttribute("validProcess", applicationService.getApplicationVariablesKeyValue("PROCESS"));
+			model.addAttribute("validProcess", applicationService.getApplicationVariables("PROCESS"));
 			model.addAttribute("detectionVariable", new DetectionVariable(applicationService.getApplicationVariables("DETECTION VARIABLE")));
 			return "application-settings";
 		}
@@ -214,7 +214,7 @@ public class AdminViewController {
 		
 		model.addAttribute("validPositions", applicationService.getApplicationVariables("POSITION"));
 		model.addAttribute("validDepartments", applicationService.getApplicationVariables("DEPARTMENT"));
-		model.addAttribute("validProcess", applicationService.getApplicationVariablesKeyValue("PROCESS"));
+		model.addAttribute("validProcess", applicationService.getApplicationVariables("PROCESS"));
 		model.addAttribute("detectionVariable", new DetectionVariable(applicationService.getApplicationVariables("DETECTION VARIABLE")));
 		return "application-settings";
 	}
@@ -228,7 +228,7 @@ public class AdminViewController {
 		if(result.hasErrors()) {
 			model.addAttribute("validPositions", applicationService.getApplicationVariables("POSITION"));
 			model.addAttribute("validDepartments", applicationService.getApplicationVariables("DEPARTMENT"));
-			model.addAttribute("validProcess", applicationService.getApplicationVariablesKeyValue("PROCESS"));
+			model.addAttribute("validProcess", applicationService.getApplicationVariables("PROCESS"));
 			model.addAttribute("detectionVariable", new DetectionVariable(applicationService.getApplicationVariables("DETECTION VARIABLE")));
 			return "application-settings";
 		}
@@ -237,7 +237,7 @@ public class AdminViewController {
 		
 		model.addAttribute("validPositions", applicationService.getApplicationVariables("POSITION"));
 		model.addAttribute("validDepartments", applicationService.getApplicationVariables("DEPARTMENT"));
-		model.addAttribute("validProcess", applicationService.getApplicationVariablesKeyValue("PROCESS"));
+		model.addAttribute("validProcess", applicationService.getApplicationVariables("PROCESS"));
 		model.addAttribute("detectionVariable", new DetectionVariable(applicationService.getApplicationVariables("DETECTION VARIABLE")));
 		return "application-settings";
 	}
@@ -251,7 +251,7 @@ public class AdminViewController {
 		if(result.hasErrors()) {
 			model.addAttribute("validPositions", applicationService.getApplicationVariables("POSITION"));
 			model.addAttribute("validDepartments", applicationService.getApplicationVariables("DEPARTMENT"));
-			model.addAttribute("validProcess", applicationService.getApplicationVariablesKeyValue("PROCESS"));
+			model.addAttribute("validProcess", applicationService.getApplicationVariables("PROCESS"));
 			model.addAttribute("detectionVariable", new DetectionVariable(applicationService.getApplicationVariables("DETECTION VARIABLE")));
 			return "application-settings";
 		}
@@ -264,7 +264,7 @@ public class AdminViewController {
 		
 		model.addAttribute("validPositions", applicationService.getApplicationVariables("POSITION"));
 		model.addAttribute("validDepartments", applicationService.getApplicationVariables("DEPARTMENT"));
-		model.addAttribute("validProcess", applicationService.getApplicationVariablesKeyValue("PROCESS"));
+		model.addAttribute("validProcess", applicationService.getApplicationVariables("PROCESS"));
 		model.addAttribute("detectionVariable", new DetectionVariable(applicationService.getApplicationVariables("DETECTION VARIABLE")));
 		return "application-settings";
 	}
@@ -279,7 +279,7 @@ public class AdminViewController {
 		model.addAttribute("detections", userService.getDetections());
 		model.addAttribute("validPositions", applicationService.getApplicationVariables("POSITION"));
 		model.addAttribute("validDepartments", applicationService.getApplicationVariables("DEPARTMENT"));
-		model.addAttribute("validProcess", applicationService.getApplicationVariablesKeyValue("PROCESS"));
+		model.addAttribute("validProcess", applicationService.getApplicationVariables("PROCESS"));
 		model.addAttribute("detectionVariable", new DetectionVariable(applicationService.getApplicationVariables("DETECTION VARIABLE")));
 		return "detection-history";
 	}

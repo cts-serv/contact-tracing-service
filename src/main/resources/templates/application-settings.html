@@ -137,15 +137,15 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="pro: ${validProcess}">
-								<td th:text="${pro.code}"></td>
-								<td th:text="${pro.description}"></td>
+							<tr th:each="proc: ${validProcess}">
+								<td th:text="${proc.code}"></td>
+								<td th:text="${proc.description}"></td>
 								<td>
 									<form class="needs-validation" action="#" th:action="@{/applicationsettings/remove}" th:object="${applicationVariable}" method="post" novalidate>
-										<input type="hidden" th:value="${pro.code}" name="code">
-										<input type="hidden" th:value="${pro.description}" name="description">
-										<input type="hidden" th:value="${pro.enabled}" name="enabled">
-										<input type="hidden" th:value="${pro.variableId}" name="variableId">
+										<input type="hidden" th:value="${proc.code}" name="code">
+										<input type="hidden" th:value="${proc.description}" name="description">
+										<input type="hidden" th:value="${proc.enabled}" name="enabled">
+										<input type="hidden" th:value="${proc.variableId}" name="variableId">
 										<button type="submit" class="btn btn-danger  btn-sm">Remove</button>
 									</form>
 								</td>
