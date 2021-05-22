@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserProfile extends UserRegistration{
 	
-	@Pattern(regexp = "^([a-zA-Z]{2,50}|)$", message = "Invalid middle name.")
+	@Pattern(regexp = "^([a-zA-Z\s]{2,50}|)$", message = "Invalid middle name.")
 	private String middleName;
 	
 	@Pattern(regexp = "^[0-9]{6,6}$", message = "Invalid id number.")
