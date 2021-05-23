@@ -182,7 +182,7 @@ public class EmailService {
 			for (UserProfile userProfile : userProfileList) {
 				if(!userProfile.getTemperatureRecords().isEmpty()) {
 					for(TemperatureRecord temperatureRecord : userProfile.getTemperatureRecords()) {
-						if(temperatureRecord.getRecordDate().isAfter(LocalDate.now().atStartOfDay())) {
+						if(temperatureRecord.getRecordDate().isAfter(LocalDate.now().minusDays(1).atStartOfDay())) {
 							List<String> fields = Arrays.asList("#" + userProfile.getIdNumber(), 
 									userProfile.getFirstName(),
 									userProfile.getMiddleName(), 
