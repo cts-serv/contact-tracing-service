@@ -142,14 +142,16 @@ public class ApplicationService {
 		validPositionMap.put("ENGR", "Service Engineer");
 		
 		Map<String, String> validDepartmentMap = new HashMap<>();
-		validDepartmentMap.put("PRMN", "Production Maintenance");
-		validDepartmentMap.put("PRDN", "Production");
-		validDepartmentMap.put("QTCT", "Quality Control");
-		validDepartmentMap.put("QTAS", "Quality Assurance");
-		validDepartmentMap.put("PRCT", "Production Control");
-		validDepartmentMap.put("VSTR", "Visitor");
-		validDepartmentMap.put("OPCT", "Operation Control");
-		validDepartmentMap.put("MNCT", "Manufacturing Control");
+		validDepartmentMap.put("PC1", "PC 1");
+		validDepartmentMap.put("PC2", "PC 2");
+		validDepartmentMap.put("PC3", "PC 3");
+		validDepartmentMap.put("PC4", "PC 4");
+		
+		
+		validDepartmentMap.put("FDASSY", "FD THD/SOP ASSY");
+		validDepartmentMap.put("FDEND", "FD THD/SOP END");
+		
+		
 		
 		Map<String, String> validProcessMap = new HashMap<>();
 		validProcessMap.put("DC", "DC");

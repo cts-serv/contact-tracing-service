@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
@@ -180,36 +182,22 @@ public class EmailService {
 			for (UserProfile userProfile : userProfileList) {
 				if(!userProfile.getTemperatureRecords().isEmpty()) {
 					for(TemperatureRecord temperatureRecord : userProfile.getTemperatureRecords()) {
-						List<String> fields = Arrays.asList(String.valueOf(userProfile.getUserProfileId()), 
-								userProfile.getFirstName(),
-								userProfile.getMiddleName(), 
-								userProfile.getLastName(), 
-								"#" + userProfile.getIdNumber(),
-								userProfile.getContactNumber(), 
-								userProfile.getEmail(), 
-								userProfile.getPosition(), 
-								userProfile.getDepartment(),
-								String.valueOf(userProfile.isUserAgreementAccepted()),
-								String.valueOf(temperatureRecord.getTemperature()),
-								temperatureRecord.getAreaCode(),
-								String.valueOf(temperatureRecord.getRecordDate()));
-						csvPrinter.printRecord(fields);
+						if(temperatureRecord.getRecordDate().isAfter(LocalDate.now().atStartOfDay())) {
+							List<String> fields = Arrays.asList("#" + userProfile.getIdNumber(), 
+									userProfile.getFirstName(),
+									userProfile.getMiddleName(), 
+									userProfile.getLastName(),
+									userProfile.getContactNumber(), 
+									userProfile.getEmail(), 
+									userProfile.getPosition(), 
+									userProfile.getDepartment(),
+									String.valueOf(temperatureRecord.getTemperature()),
+									temperatureRecord.getAreaCode(),
+									String.valueOf(temperatureRecord.getRecordDate()));
+							csvPrinter.printRecord(fields);
+						}
 					}
-				} else {
-					List<String> fields = Arrays.asList(String.valueOf(userProfile.getUserProfileId()), 
-							userProfile.getFirstName(),
-							userProfile.getMiddleName(), 
-							userProfile.getLastName(), 
-							"#" + userProfile.getIdNumber(),
-							userProfile.getContactNumber(), 
-							userProfile.getEmail(), 
-							userProfile.getPosition(), 
-							userProfile.getDepartment(),
-							String.valueOf(userProfile.isUserAgreementAccepted()));
-					csvPrinter.printRecord(fields);
 				}
-				
-				
 			}
 			
 			csvPrinter.flush();

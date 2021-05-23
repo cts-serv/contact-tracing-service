@@ -1,5 +1,6 @@
 package com.thesisproject.ct.contacttracingservice.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,10 @@ public class ApplicationController {
 	@PostMapping(path = "/initialize")
 	public ResponseEntity<List<ApplicationVariable>> initializeApplication() {
 		return ResponseEntity.ok(applicationService.initializeApplication());
+	}
+	
+	@GetMapping(path = "/datetime")
+	public String getServerDateTime() {
+		return LocalDateTime.now().toString();
 	}
 }
