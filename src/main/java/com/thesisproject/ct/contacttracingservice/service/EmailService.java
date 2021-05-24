@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
@@ -45,9 +44,6 @@ public class EmailService {
 
 	@Autowired
 	private JavaMailSender emailSender;
-
-	@Autowired
-	private UserService userService;
 	
 	@Autowired
 	private ApplicationService applicationService;
@@ -167,7 +163,7 @@ public class EmailService {
 		}
 	}
 
-	public void sendUserProfilesReport() {
+	public void sendUserProfilesReport(List<UserProfile> userProfileList) {
 		MimeMessage message = emailSender.createMimeMessage();
 		File file = new File("report.csv");
 		try(FileOutputStream fos = new FileOutputStream(file); ByteArrayOutputStream out = new ByteArrayOutputStream(); CSVPrinter csvPrinter = new CSVPrinter(new PrintWriter(out), CSVFormat.DEFAULT.withHeader(SubjectTableHeaders.class))) {
@@ -178,7 +174,6 @@ public class EmailService {
 			helper.setSubject("Contact Tracing Daily Report");
 			helper.setText("Attached is the updated report of the registered contact tracing users.");
 
-			List<UserProfile> userProfileList = userService.getUserProfiles(null);
 			for (UserProfile userProfile : userProfileList) {
 				if(!userProfile.getTemperatureRecords().isEmpty()) {
 					for(TemperatureRecord temperatureRecord : userProfile.getTemperatureRecords()) {

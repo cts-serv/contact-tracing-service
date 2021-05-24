@@ -152,6 +152,53 @@ public class ApplicationService {
 		validDepartmentMap.put("FDEND", "FD THD/SOP END");
 		
 		
+		validDepartmentMap.put("DEPT1", "PC1");
+		validDepartmentMap.put("DEPT2", "PC2");
+		validDepartmentMap.put("DEPT3", "PC3");
+		validDepartmentMap.put("DEPT4", "PC4");
+		validDepartmentMap.put("DEPT5", "PD THD/SOP ASSY");
+		validDepartmentMap.put("DEPT6", "PD THD/SOP END");
+		validDepartmentMap.put("DEPT7", "PD SOP WIDE ALL");
+		validDepartmentMap.put("DEPT8", "PD QFP/LAPIS ALL FRONT");
+		validDepartmentMap.put("DEPT9", "PD QFP/LAPIS ALL END");
+		validDepartmentMap.put("DEPT10", "PD MAP ALL");
+		validDepartmentMap.put("DEPT11", "PQD ALL");
+		validDepartmentMap.put("DEPT12", "EDS");
+		validDepartmentMap.put("DEPT13", "WL CSP/MEMS");
+		validDepartmentMap.put("DEPT14", "PM DC/DB");
+		validDepartmentMap.put("DEPT15", "PM WB");
+		validDepartmentMap.put("DEPT16", "PM MP");
+		validDepartmentMap.put("DEPT17", "PM FL");
+		validDepartmentMap.put("DEPT18", "PM FL /ATC");
+		validDepartmentMap.put("DEPT19", "PM SINGULATION");
+		validDepartmentMap.put("DEPT20", "TOOLINGS");
+		validDepartmentMap.put("DEPT21", "PM FT");
+		validDepartmentMap.put("DEPT22", "PM TP");
+		validDepartmentMap.put("DEPT23", "ELEC EQPT ENGG");
+		validDepartmentMap.put("DEPT24", "PM EDS/MEMS");
+		validDepartmentMap.put("DEPT25", "TE MAINTENANCE");
+		validDepartmentMap.put("DEPT26", "TE SUPPORT");
+		validDepartmentMap.put("DEPT27", "TE FYI");
+		validDepartmentMap.put("DEPT28", "PROCESS QC1");
+		validDepartmentMap.put("DEPT29", "PROCESS QC2");
+		validDepartmentMap.put("DEPT30", "MECHA EQPTT ENGG");
+		validDepartmentMap.put("DEPT31", "PROD ENGG SYS");
+		validDepartmentMap.put("DEPT32", "OPERATION CTRL");
+		validDepartmentMap.put("DEPT33", "MANUFACTURING CTRL");
+		validDepartmentMap.put("DEPT34", "PROCESS ENGG");
+		validDepartmentMap.put("DEPT35", "NEW PACKAGE DEV");
+		validDepartmentMap.put("DEPT36", "AUTOMOTIVE ENGG");
+		validDepartmentMap.put("DEPT37", "TE IMPROVEMENT");
+		validDepartmentMap.put("DEPT38", "TEST BOX");
+		validDepartmentMap.put("DEPT39", "PCB DESIGN");
+		validDepartmentMap.put("DEPT40", "TEST PROBE");
+		validDepartmentMap.put("DEPT41", "TEST SOL DEV 1");
+		validDepartmentMap.put("DEPT42", "TEST SOL DEV 2");
+		validDepartmentMap.put("DEPT43", "TEST SOL DEV SUPP");
+		validDepartmentMap.put("DEPT44", "PROJECT CTRL");
+
+		
+		
 		
 		Map<String, String> validProcessMap = new HashMap<>();
 		validProcessMap.put("DC", "DC");

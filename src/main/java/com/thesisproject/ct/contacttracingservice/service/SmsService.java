@@ -1,5 +1,6 @@
 package com.thesisproject.ct.contacttracingservice.service;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.thesisproject.ct.contacttracingservice.model.SmsObject;
 import com.thesisproject.ct.contacttracingservice.model.SmsResponse;
+import com.thesisproject.ct.contacttracingservice.model.TemperatureRecord;
 import com.thesisproject.ct.contacttracingservice.model.UserProfile;
 
 @Service
@@ -18,6 +20,8 @@ public class SmsService {
 	
 	@Autowired
 	private ApplicationService applicationService;
+	
+	@Autowired
 	
 	@Value("${semaphore.messages.url}")
 	private String semaphoreMessagesUrl;
@@ -58,10 +62,6 @@ public class SmsService {
 		template.postForObject(semaphoreMessagesUrl, httpEntity, String.class);
 	}
 	
-	public void sendDailyRecordSms() {
-		
-	}
-	
 	public void sendDetectionSms(UserProfile userProfile) {
 		SmsObject sms = new SmsObject();
 		sms.setApikey(this.semaphoreApiKey);
@@ -70,7 +70,32 @@ public class SmsService {
 		sms.setMessage("Fever detected, please coordinate with the clinic for further instructions.");
 		RestTemplate template = new RestTemplate();
 		HttpEntity<SmsObject> httpEntity = new HttpEntity<>(sms);
-		String response = template.postForObject(semaphoreMessagesUrl, httpEntity, String.class);
-		System.out.println(response);
+		template.postForObject(semaphoreMessagesUrl, httpEntity, String.class);
+	}
+	
+	public void sendUserActivityReportSms(List<UserProfile> userProfileList) {
+		for (UserProfile userProfile : userProfileList) {
+			SmsObject sms = new SmsObject();
+			sms.setApikey(this.semaphoreApiKey);
+			StringBuilder builder = new StringBuilder();
+			if(!userProfile.getTemperatureRecords().isEmpty()) {
+				for(TemperatureRecord temperatureRecord : userProfile.getTemperatureRecords()) {
+					if(temperatureRecord.getRecordDate().isAfter(LocalDate.now().minusDays(1).atStartOfDay())) {
+						builder.append(temperatureRecord.getRecordDate().getHour())
+							   .append(temperatureRecord.getRecordDate().getMinute())
+							   .append("H ")
+							   .append(temperatureRecord.getTemperature())
+							   .append("\n");
+					}
+				}
+			}
+			if(builder.length() > 1) {
+				sms.setNumber(userProfile.getContactNumber());
+				sms.setMessage(builder.toString());
+				RestTemplate template = new RestTemplate();
+				HttpEntity<SmsObject> httpEntity = new HttpEntity<>(sms);
+				template.postForObject(semaphoreMessagesUrl, httpEntity, String.class);
+			}
+		}
 	}
 }

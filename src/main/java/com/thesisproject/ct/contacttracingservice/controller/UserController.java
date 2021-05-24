@@ -1,5 +1,6 @@
 package com.thesisproject.ct.contacttracingservice.controller;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,6 +25,7 @@ import com.thesisproject.ct.contacttracingservice.model.Detection;
 import com.thesisproject.ct.contacttracingservice.model.TemperatureRecord;
 import com.thesisproject.ct.contacttracingservice.model.UserProfile;
 import com.thesisproject.ct.contacttracingservice.service.EmailService;
+import com.thesisproject.ct.contacttracingservice.service.SmsService;
 import com.thesisproject.ct.contacttracingservice.service.UserService;
 
 import io.swagger.v3.oas.annotations.Parameter;
@@ -39,9 +41,12 @@ public class UserController {
 	@Autowired
 	private EmailService emailService;
 	
+	@Autowired
+	private SmsService smsService;
+	
 	@PostMapping(path = "/export")
 	public ResponseEntity<List<UserProfile>> exportUsers() {
-		emailService.sendUserProfilesReport();
+		emailService.sendUserProfilesReport(userService.getUserProfiles(null));
 		return ResponseEntity.ok(null);
 	}
 	
@@ -81,5 +86,11 @@ public class UserController {
 	@GetMapping(path = "/detections", produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Detection>> getDetections() {
 		return ResponseEntity.ok(userService.getDetections());
+	}
+	
+	@PostMapping(path = "/sendUserActivityMessage")
+	public String sendUserActivityMessage(@RequestParam(name = "idNumber") String idNumber) {
+		smsService.sendUserActivityReportSms(Arrays.asList(userService.getUserProfileByIdNumber(idNumber)));
+		return "Report Sent";
 	}
 }

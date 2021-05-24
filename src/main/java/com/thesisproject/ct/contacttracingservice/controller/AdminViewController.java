@@ -57,8 +57,7 @@ public class AdminViewController {
 	@GetMapping(path = "/sendreport")
 	public String postTriggerEmailReport(SearchObject searchObject,
 						  ModelMap model) {
-		
-		emailService.sendUserProfilesReport();
+		emailService.sendUserProfilesReport(userService.getUserProfiles(null));
 		model.addAttribute("qrCodeImage", "data:image/png;base64," + Base64.getEncoder().encodeToString(QRCodeUtility.generateQRCode(registrationFormUrl, 500, 500)));
 		return "home";
 	}
