@@ -142,16 +142,6 @@ public class ApplicationService {
 		validPositionMap.put("ENGR", "Service Engineer");
 		
 		Map<String, String> validDepartmentMap = new HashMap<>();
-		validDepartmentMap.put("PC1", "PC 1");
-		validDepartmentMap.put("PC2", "PC 2");
-		validDepartmentMap.put("PC3", "PC 3");
-		validDepartmentMap.put("PC4", "PC 4");
-		
-		
-		validDepartmentMap.put("FDASSY", "FD THD/SOP ASSY");
-		validDepartmentMap.put("FDEND", "FD THD/SOP END");
-		
-		
 		validDepartmentMap.put("DEPT1", "PC1");
 		validDepartmentMap.put("DEPT2", "PC2");
 		validDepartmentMap.put("DEPT3", "PC3");
