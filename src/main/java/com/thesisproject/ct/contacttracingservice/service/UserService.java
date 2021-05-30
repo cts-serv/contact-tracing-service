@@ -117,6 +117,7 @@ public class UserService {
 	}
 	
 	public void deleteUserProfile(UUID userProfileId) {
+		temperatureRecordRepository.deleteByUserProfileId(userProfileId);
 		userProfileRepository.deleteById(userProfileId);
 	}
 	
@@ -167,6 +168,7 @@ public class UserService {
 	public List<Detection> getDetections() {
 		return temperatureRecordRepository.findAllByDetection(true)
 								   .stream()
+								   .sorted(Comparator.comparing(TemperatureRecordEntity::getRecordDate).reversed())
 								   .map(TemperatureRecord::new)
 								   .map(Detection::new)
 								   .map(this::getDetectionPersonDetails)

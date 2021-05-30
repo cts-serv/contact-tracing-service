@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -31,6 +32,7 @@ import org.xhtmlrenderer.pdf.PDFEncryption;
 
 import com.lowagie.text.DocumentException;
 import com.thesisproject.ct.contacttracingservice.enums.SubjectTableHeaders;
+import com.thesisproject.ct.contacttracingservice.model.ApplicationVariable;
 import com.thesisproject.ct.contacttracingservice.model.Form;
 import com.thesisproject.ct.contacttracingservice.model.TemperatureRecord;
 import com.thesisproject.ct.contacttracingservice.model.UserProfile;
@@ -127,8 +129,26 @@ public class EmailService {
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
 			helper.setFrom("no-reply-contact-tracing@gmail.com");
 			helper.addTo(userProfile.getEmail());
-			helper.addTo(applicationService.getApplicationVariable("adminEmail").getDescription());
-			helper.addTo(applicationService.getApplicationVariable("clinicEmail").getDescription());
+			Optional.ofNullable(applicationService.getApplicationVariable("adminEmail"))
+					.map(ApplicationVariable::getDescription)
+					.ifPresent(t -> {
+						try {
+							helper.addTo(t);
+						} catch (MessagingException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					});
+			Optional.ofNullable(applicationService.getApplicationVariable("clinicEmail"))
+					.map(ApplicationVariable::getDescription)
+					.ifPresent(t -> {
+						try {
+							helper.addTo(t);
+						} catch (MessagingException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					});
 			helper.setSubject("Fever Detection Notification");
 			
 			Context context = new Context();

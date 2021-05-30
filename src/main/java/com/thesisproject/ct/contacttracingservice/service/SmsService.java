@@ -1,8 +1,9 @@
 package com.thesisproject.ct.contacttracingservice.service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.thesisproject.ct.contacttracingservice.model.ApplicationVariable;
 import com.thesisproject.ct.contacttracingservice.model.SmsObject;
 import com.thesisproject.ct.contacttracingservice.model.SmsResponse;
 import com.thesisproject.ct.contacttracingservice.model.TemperatureRecord;
@@ -66,7 +68,22 @@ public class SmsService {
 		SmsObject sms = new SmsObject();
 		sms.setApikey(this.semaphoreApiKey);
 		//sms.setSendername(this.senderName);
-		sms.setNumber(userProfile.getContactNumber() + "," + applicationService.getApplicationVariable("adminContactNumber").getDescription() + "," + applicationService.getApplicationVariable("clinicContactNumber").getDescription());
+		StringBuilder builder = new StringBuilder();
+		builder.append(userProfile.getContactNumber());
+		
+		Optional.ofNullable(applicationService.getApplicationVariable("adminContactNumber"))
+				.map(ApplicationVariable::getDescription)
+				.ifPresent(adminContactNumber -> {
+					builder.append(",").append(adminContactNumber);
+				});
+		
+		Optional.ofNullable(applicationService.getApplicationVariable("clinicContactNumber"))
+				.map(ApplicationVariable::getDescription)
+				.ifPresent(clinicContactNumber -> {
+					builder.append(",").append(clinicContactNumber);
+				});
+		
+		sms.setNumber(builder.toString());
 		sms.setMessage("Fever detected, please coordinate with the clinic for further instructions.");
 		RestTemplate template = new RestTemplate();
 		HttpEntity<SmsObject> httpEntity = new HttpEntity<>(sms);
@@ -80,12 +97,12 @@ public class SmsService {
 			StringBuilder builder = new StringBuilder();
 			if(!userProfile.getTemperatureRecords().isEmpty()) {
 				for(TemperatureRecord temperatureRecord : userProfile.getTemperatureRecords()) {
-					if(temperatureRecord.getRecordDate().isAfter(LocalDate.now().minusDays(1).atStartOfDay())) {
-						builder.append(temperatureRecord.getRecordDate().getHour())
-							   .append(temperatureRecord.getRecordDate().getMinute())
+					if(temperatureRecord.getRecordDate().isAfter(LocalDateTime.now().minusDays(1))) {
+						builder.append(String.valueOf(temperatureRecord.getRecordDate().getHour()).length() < 2 ? "0" + String.valueOf(temperatureRecord.getRecordDate().getHour()) : String.valueOf(temperatureRecord.getRecordDate().getHour()))
+							   .append(String.valueOf(temperatureRecord.getRecordDate().getMinute()).length() < 2 ? "0" + String.valueOf(temperatureRecord.getRecordDate().getMinute()) : String.valueOf(temperatureRecord.getRecordDate().getMinute()))
 							   .append("H ")
 							   .append(temperatureRecord.getTemperature())
-							   .append("\n");
+							   .append("C\n");
 					}
 				}
 			}

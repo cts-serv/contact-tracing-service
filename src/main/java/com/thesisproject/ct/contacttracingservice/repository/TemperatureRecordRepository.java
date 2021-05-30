@@ -14,4 +14,5 @@ public interface TemperatureRecordRepository extends JpaRepository<TemperatureRe
 	public List<TemperatureRecordEntity> findAllByUserProfileId(UUID userProfileId);
 	public List<TemperatureRecordEntity> findAllByDetection(boolean detection);
 	public List<TemperatureRecordEntity> findAllByRecordDateBetweenAndUserProfileIdNot(LocalDateTime dateTimeBefore, LocalDateTime dateTimeAfter, UUID userProfileIdNot);
+	public void deleteByUserProfileId(UUID userProfileId);
 }

@@ -25,7 +25,7 @@ public class UserReportScheduler {
 	@Autowired
 	private SmsService smsService;
 	
-	@Scheduled(cron = "@daily")
+	@Scheduled(cron = "0 0 8 * * ?")
 	public void sendUserRecordReports() {
 		List<UserProfile> userProfileList = userService.getUserProfiles(null);
 		emailService.sendUserProfilesReport(userProfileList);

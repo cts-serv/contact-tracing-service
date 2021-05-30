@@ -14,6 +14,7 @@
 	<nav th:replace="home::navi"></nav>
 	<div class="container-fluid row justify-content-center">
 		<h3 class="display-3">Detection History</h3>
+		<a th:href="@{|/api/application/detectionhistory/download|}"><button class="btn btn-primary col-6 mb-3" th:text="Extract"></button></a>
 		<div class="col-12 accordion mb-3" id="detections-list">
 			<div class="accordion-item"  th:each="detection: ${detections}">
 				<h2 class="accordion-header" th:id="'hdr'+${detection.temperatureRecord.recordId}">
@@ -54,6 +55,10 @@
 									<tr>
 										<td scope="col">Position:</td>
 										<td th:text="${detection.userProfile.position}"></td>
+									</tr>
+									<tr>
+										<td scope="col">Process:</td>
+										<td th:text="${detection.userProfile.process}"></td>
 									</tr>
 									<tr>
 										<td scope="col">Temperature Record:</td>
