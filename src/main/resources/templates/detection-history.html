@@ -65,10 +65,6 @@
 										<td th:text="${detection.temperatureRecord.temperature}"></td>
 									</tr>
 									<tr>
-										<td scope="col">Area Code:</td>
-										<td th:text="${detection.temperatureRecord.areaCode}"></td>
-									</tr>
-									<tr>
 										<td scope="col">Date/Time:</td>
 										<td th:text="${detection.temperatureRecord.recordDate}"></td>
 									</tr>
@@ -84,6 +80,7 @@
 										<th>Department</th>
 										<th>Position</th>
 										<th>Contact Number</th>
+										<th>Record Date/Time</th>
 									</tr>
 								</thead>
 								<tbody th:each="contacted: ${detection.contactedUsers}">
@@ -92,6 +89,7 @@
 										<td th:text="${contacted.department}"></td>
 										<td th:text="${contacted.position}"></td>
 										<td th:text="${contacted.contactNumber}"></td>
+										<td th:each="temp: ${contacted.temperatureRecords}" th:text="${temp.recordDate}"></td>
 									</tr>
 								</tbody>
 							</table>

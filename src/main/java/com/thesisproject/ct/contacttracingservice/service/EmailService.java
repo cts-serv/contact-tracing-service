@@ -131,6 +131,7 @@ public class EmailService {
 			helper.addTo(userProfile.getEmail());
 			Optional.ofNullable(applicationService.getApplicationVariable("adminEmail"))
 					.map(ApplicationVariable::getDescription)
+					.filter(t -> !t.isEmpty())
 					.ifPresent(t -> {
 						try {
 							helper.addTo(t);
@@ -141,6 +142,7 @@ public class EmailService {
 					});
 			Optional.ofNullable(applicationService.getApplicationVariable("clinicEmail"))
 					.map(ApplicationVariable::getDescription)
+					.filter(t -> !t.isEmpty())
 					.ifPresent(t -> {
 						try {
 							helper.addTo(t);
@@ -208,7 +210,6 @@ public class EmailService {
 									userProfile.getProcess(),
 									userProfile.getDepartment(),
 									String.valueOf(temperatureRecord.getTemperature()),
-									temperatureRecord.getAreaCode(),
 									String.valueOf(temperatureRecord.getRecordDate()));
 							csvPrinter.printRecord(fields);
 						}

@@ -73,12 +73,14 @@ public class SmsService {
 		
 		Optional.ofNullable(applicationService.getApplicationVariable("adminContactNumber"))
 				.map(ApplicationVariable::getDescription)
+				.filter(t -> !t.isEmpty())
 				.ifPresent(adminContactNumber -> {
 					builder.append(",").append(adminContactNumber);
 				});
 		
 		Optional.ofNullable(applicationService.getApplicationVariable("clinicContactNumber"))
 				.map(ApplicationVariable::getDescription)
+				.filter(t -> !t.isEmpty())
 				.ifPresent(clinicContactNumber -> {
 					builder.append(",").append(clinicContactNumber);
 				});

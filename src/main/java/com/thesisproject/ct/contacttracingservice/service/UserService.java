@@ -183,8 +183,12 @@ public class UserService {
 		List<UserProfile> contactedUsers = temperatureRecordRepository.findAllByRecordDateBetweenAndUserProfileIdNot(dateTimeBefore, dateTimeAfter, detection.getTemperatureRecord().getUserProfileId())
 																	  .stream()
 																	  .map(TemperatureRecord::new)
-																	  .map(TemperatureRecord::getUserProfileId)
-																	  .map(this::getUserProfile)
+																	  .map(temp -> {
+																		  UserProfile user = this.getUserProfile(temp.getUserProfileId());
+																		  user.getTemperatureRecords().clear();
+																		  user.getTemperatureRecords().add(temp);
+																		  return user;
+																	  })
 																	  .collect(Collectors.toList());
 		detection.getContactedUsers().addAll(contactedUsers);
 		return detection;

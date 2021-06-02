@@ -11,6 +11,5 @@ public enum SubjectTableHeaders {
 	PROCESS,
 	DEPARTMENT,
 	TEMPERATURE,
-	AREA_CODE,
 	RECORD_DATE
 }

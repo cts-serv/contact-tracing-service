@@ -10,6 +10,5 @@ public enum DetectionTableHeaders {
 	POSITION,
 	PROCESS,
 	TEMPERATURE,
-	AREA_CODE,
 	RECORD_DATE
 }

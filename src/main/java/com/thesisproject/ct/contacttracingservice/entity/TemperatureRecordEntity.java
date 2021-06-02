@@ -43,7 +43,7 @@ public class TemperatureRecordEntity {
 	@Column(name = "record_date", nullable = false)
 	private LocalDateTime recordDate;
 	
-	@Column(name = "area_code", nullable = false)
+	@Column(name = "area_code", nullable = true)
 	private String areaCode;
 	
 	@Column(name = "detection", nullable = false)
@@ -68,7 +68,6 @@ public class TemperatureRecordEntity {
 		this.userProfileId = temperatureRecord.getUserProfileId();
 		this.temperature = temperatureRecord.getTemperature();
 		this.recordDate = temperatureRecord.getRecordDate();
-		this.areaCode = temperatureRecord.getAreaCode();
 		this.detection = temperatureRecord.isDetection();
 	}
 }

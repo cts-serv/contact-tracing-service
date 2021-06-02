@@ -15,7 +15,6 @@ public class TemperatureRecord {
 	private UUID userProfileId;
 	private Double temperature;
 	private LocalDateTime recordDate;
-	private String areaCode;
 	private boolean detection;
 	
 	public TemperatureRecord(TemperatureRecordEntity entity) {
@@ -23,7 +22,6 @@ public class TemperatureRecord {
 		this.userProfileId = entity.getUserProfileId();
 		this.temperature = entity.getTemperature();
 		this.recordDate = entity.getRecordDate();
-		this.areaCode = entity.getAreaCode();
 		this.detection = entity.isDetection();
 	}
 }
