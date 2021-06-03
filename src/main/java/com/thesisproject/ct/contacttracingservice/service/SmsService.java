@@ -68,28 +68,34 @@ public class SmsService {
 		SmsObject sms = new SmsObject();
 		sms.setApikey(this.semaphoreApiKey);
 		//sms.setSendername(this.senderName);
-		StringBuilder builder = new StringBuilder();
-		builder.append(userProfile.getContactNumber());
+		sms.setNumber(userProfile.getContactNumber());
+		sms.setMessage("Fever detected, please coordinate with the clinic for further instructions.");
+		RestTemplate template = new RestTemplate();
+		HttpEntity<SmsObject> httpEntity = new HttpEntity<>(sms);
+		template.postForObject(semaphoreMessagesUrl, httpEntity, String.class);
+		
 		
 		Optional.ofNullable(applicationService.getApplicationVariable("adminContactNumber"))
 				.map(ApplicationVariable::getDescription)
 				.filter(t -> !t.isEmpty())
 				.ifPresent(adminContactNumber -> {
-					builder.append(",").append(adminContactNumber);
+					sms.setNumber(adminContactNumber);
+					sms.setMessage("A fevered person was detected. Please check detection history section in CTS admin page.");
+					HttpEntity<SmsObject> httpEntityAdmin = new HttpEntity<>(sms);
+					template.postForObject(semaphoreMessagesUrl, httpEntityAdmin, String.class);
 				});
 		
 		Optional.ofNullable(applicationService.getApplicationVariable("clinicContactNumber"))
 				.map(ApplicationVariable::getDescription)
 				.filter(t -> !t.isEmpty())
 				.ifPresent(clinicContactNumber -> {
-					builder.append(",").append(clinicContactNumber);
+					sms.setNumber(clinicContactNumber);
+					sms.setMessage("A fevered person was detected. Please check detection history section in CTS admin page.");
+					HttpEntity<SmsObject> httpEntityClinic = new HttpEntity<>(sms);
+					template.postForObject(semaphoreMessagesUrl, httpEntityClinic, String.class);
 				});
 		
-		sms.setNumber(builder.toString());
-		sms.setMessage("Fever detected, please coordinate with the clinic for further instructions.");
-		RestTemplate template = new RestTemplate();
-		HttpEntity<SmsObject> httpEntity = new HttpEntity<>(sms);
-		template.postForObject(semaphoreMessagesUrl, httpEntity, String.class);
+		
 	}
 	
 	public void sendUserActivityReportSms(List<UserProfile> userProfileList) {
