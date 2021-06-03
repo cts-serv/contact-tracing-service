@@ -129,6 +129,12 @@ public class UserService {
 	}
 	
 	public TemperatureRecord postTemperatureRecord(UUID userProfileId, TemperatureRecord temperatureRecord, MultipartFile imageFile) {
+		
+		if(!temperatureRecordRepository.findAllByRecordDateAndUserProfileIdAndTemperature(temperatureRecord.getRecordDate(), temperatureRecord.getUserProfileId(), temperatureRecord.getTemperature()).isEmpty()) {
+			System.out.println("duplicate");
+			return temperatureRecord;
+		}
+		
 		return Optional.ofNullable(temperatureRecord)
 					   .map(temp -> {
 						   temp.setUserProfileId(userProfileId);
