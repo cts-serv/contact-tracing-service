@@ -129,8 +129,7 @@ public class UserService {
 	}
 	
 	public TemperatureRecord postTemperatureRecord(UUID userProfileId, TemperatureRecord temperatureRecord, MultipartFile imageFile) {
-		
-		if(!temperatureRecordRepository.findAllByRecordDateAndUserProfileIdAndTemperature(temperatureRecord.getRecordDate(), temperatureRecord.getUserProfileId(), temperatureRecord.getTemperature()).isEmpty()) {
+		if(!temperatureRecordRepository.findAllByRecordDateAndUserProfileIdAndTemperature(LocalDateTime.now(), temperatureRecord.getUserProfileId(), temperatureRecord.getTemperature()).isEmpty()) {
 			System.out.println("duplicate");
 			return temperatureRecord;
 		}
