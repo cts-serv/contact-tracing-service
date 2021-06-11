@@ -67,7 +67,8 @@ public class TemperatureRecordEntity {
 		this.recordId = temperatureRecord.getRecordId();
 		this.userProfileId = temperatureRecord.getUserProfileId();
 		this.temperature = temperatureRecord.getTemperature();
-		this.recordDate = temperatureRecord.getRecordDate();
+//		this.recordDate = temperatureRecord.getRecordDate();
+		this.recordDate = LocalDateTime.now();
 		this.areaCode = "0001";
 		this.detection = temperatureRecord.isDetection();
 	}
